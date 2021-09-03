@@ -35,4 +35,9 @@ This is a template example for lab journaling. Students in Crim 250: Statistics 
 </div>
 <div class="col-sm-6">
 
+### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+
+<a href = "https://mariacuellar.github.io">
+![](images/stats.jpg)
+</a>
 </div>
