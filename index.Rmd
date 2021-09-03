@@ -41,7 +41,7 @@ Don’t worry if you ran into issues with these first steps, we will address the
 
 
 
-^[Much of this setup is inspired by Matthew Crump, a Psychology professor at CUNY.]
+^[Much of this setup is inspired by Matthew Crump, a Psychology professor at CUNY. ]
 
 
 
