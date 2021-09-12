@@ -14,6 +14,19 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
+
+# Exploratory Data Analysis
+
+2021 | 9 | 12 Last compiled: `r Sys.Date()`
+
+Alright, so how do we proceed with exploratory data analysis?
+
+First, we figure out 
+1. What variables do we have?
+2. What are their types?
+3. Work with one variable at a time. 
+
+
 IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.
 
 
