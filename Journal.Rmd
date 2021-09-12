@@ -15,7 +15,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 
-# Testing out procedure
+# Now doing it without the intermediate step
 
 # Exploratory Data Analysis
 
