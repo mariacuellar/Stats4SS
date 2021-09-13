@@ -6,7 +6,7 @@ output:
     toc_float: true
     collapsed: false
     number_sections: false
-    toc_depth: 1
+    toc_depth: 2
     #code_folding: hide
 ---
 
@@ -62,6 +62,8 @@ We have five variables: gender, crime type, age, number of convictions, and race
 # Gender
 
 Let's start exploring gender. Gender is a categorical variable, so it can be summarized with a table. 
+
+# (Table)
 ```{r}
 # Make a table of gender.
 table(dat$gender)
@@ -115,6 +117,8 @@ We will change the number 999 to be a code for "missing".
 ```{r}
 dat$age <- dat$age %>% na_if(., "999")
 ```
+
+# (Histogram)
 
 We can make a histogram to quickly get a sense of *shape* (i.e., how age is distributed) and *unusual observations*.
 ```{r, echo = TRUE, fig.width = 8, fig.height = 4}
@@ -176,7 +180,10 @@ How is number of convictions distributed?
 hist(dat$number.of.convictions, main="Number of convictions", xlab="Convictions")
 ```
 
-Make an exportable figure that will be saved in the directory you're currently in. Not sure which directory you're in? Check with `r, eval=FALSE getwd()` and if you need to switch you can just use `r, eval=FALSE setwd()`.
+
+# (Barplot)
+
+Let's make a barplot to see this.
 ```{r, echo = TRUE, fig.width = 15, fig.height = 3}
 counts <- table(dat$gender, dat$crime.type)
 barplot(counts, col=c("red", "blue"), legend=TRUE)
@@ -206,6 +213,8 @@ Cross-tabulation is the basic bivariate non-graphical EDA technique.
 table(dat$race, dat$number.of.convictions)
 ```
 
+# (Boxplot)
+
 It's probably easier to visualize this in a boxplot rather than a table.
 ```{r, echo = TRUE, fig.width = 10, fig.height = 4}
 plot(factor(dat$race), dat$number.of.convictions, ylab="Convictions", xlab="Race", names=c("A. Indian","Asian","Black","Native Hawaii","White"))
@@ -216,10 +225,12 @@ What does the boxplot mean? Boxplots show robust measures of location and spread
 Side-by-side boxplots are the best graphical EDA technique for examining the relationship between a categorical variable and a quantitative variable, as well as the distribution of the quantitative variable at each level of the categorical variable.
 
 ![Descroption of boxplot.](images/boxplot.jpg)
-How is age related to number of convictions?
+How is age related to number of convictions? This next plot is a scatterplot, but it's kind of a strange one that doesn't tell us much because there is not much variability in number of convictions.
 ```{r}
 plot(dat$age, dat$number.of.convictions, xlab="Age", ylab="Convictions")
 ```
+
+# (Scatterplot)
 
 A scatterplot is great when you want to compare two continuous quantitative variables. Since our dataset doesn't have great examples of these, we'll just generate two random normal vectors and make a scatterplot to compare them.
 

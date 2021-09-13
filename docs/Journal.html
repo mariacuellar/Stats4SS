@@ -407,6 +407,9 @@ summary(dat)</code></pre>
 <div id="gender" class="section level1">
 <h1>Gender</h1>
 <p>Let’s start exploring gender. Gender is a categorical variable, so it can be summarized with a table.</p>
+</div>
+<div id="table" class="section level1">
+<h1>(Table)</h1>
 <pre class="r"><code># Make a table of gender.
 table(dat$gender)</code></pre>
 <pre><code>## 
@@ -450,6 +453,9 @@ hist(as.numeric(as.factor((dat$gender))), main=&quot;Histogram of gender&quot;, 
 <p>Uh oh. Why is the max age 999? Usually these high numbers are used as codes in the data to denote a response that was unusual somehow, such as “don’t know”, “refused to answer”, “blank (no answer)”, “legitimate skip”, etc.</p>
 <p>We will change the number 999 to be a code for “missing”.</p>
 <pre class="r"><code>dat$age &lt;- dat$age %&gt;% na_if(., &quot;999&quot;)</code></pre>
+</div>
+<div id="histogram" class="section level1">
+<h1>(Histogram)</h1>
 <p>We can make a histogram to quickly get a sense of <em>shape</em> (i.e., how age is distributed) and <em>unusual observations</em>.</p>
 <pre class="r"><code># Using base R
 hist(dat$age, main=&quot;Histogram of age&quot;, xlab=&quot;Years&quot;, ylab=&quot;Frequency&quot;)</code></pre>
@@ -492,7 +498,10 @@ p + theme_fivethirtyeight()</code></pre>
 <p>How is number of convictions distributed?</p>
 <pre class="r"><code>hist(dat$number.of.convictions, main=&quot;Number of convictions&quot;, xlab=&quot;Convictions&quot;)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p>Make an exportable figure that will be saved in the directory you’re currently in. Not sure which directory you’re in? Check with <code>r, eval=FALSE getwd()</code> and if you need to switch you can just use <code>r, eval=FALSE setwd()</code>.</p>
+</div>
+<div id="barplot" class="section level1">
+<h1>(Barplot)</h1>
+<p>Let’s make a barplot to see this.</p>
 <pre class="r"><code>counts &lt;- table(dat$gender, dat$crime.type)
 barplot(counts, col=c(&quot;red&quot;, &quot;blue&quot;), legend=TRUE)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-18-1.png" width="1440" /></p>
@@ -529,14 +538,20 @@ barplot(counts, col=c(&quot;red&quot;, &quot;blue&quot;), legend=TRUE)</code></p
 ##   Black or African American                 9 7 2 1
 ##   Native Hawaiian or Other Pacific Islander 0 1 2 0
 ##   White                                     4 9 7 0</code></pre>
+</div>
+<div id="boxplot" class="section level1">
+<h1>(Boxplot)</h1>
 <p>It’s probably easier to visualize this in a boxplot rather than a table.</p>
 <pre class="r"><code>plot(factor(dat$race), dat$number.of.convictions, ylab=&quot;Convictions&quot;, xlab=&quot;Race&quot;, names=c(&quot;A. Indian&quot;,&quot;Asian&quot;,&quot;Black&quot;,&quot;Native Hawaii&quot;,&quot;White&quot;))</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-21-1.png" width="960" /></p>
 <p>What does the boxplot mean? Boxplots show robust measures of location and spread as well as providing information about symmetry and outliers.</p>
 <p>Side-by-side boxplots are the best graphical EDA technique for examining the relationship between a categorical variable and a quantitative variable, as well as the distribution of the quantitative variable at each level of the categorical variable.</p>
-<p><img src="images/boxplot.jpg" alt="Descroption of boxplot." /> How is age related to number of convictions?</p>
+<p><img src="images/boxplot.jpg" alt="Descroption of boxplot." /> How is age related to number of convictions? This next plot is a scatterplot, but it’s kind of a strange one that doesn’t tell us much because there is not much variability in number of convictions.</p>
 <pre class="r"><code>plot(dat$age, dat$number.of.convictions, xlab=&quot;Age&quot;, ylab=&quot;Convictions&quot;)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="scatterplot" class="section level1">
+<h1>(Scatterplot)</h1>
 <p>A scatterplot is great when you want to compare two continuous quantitative variables. Since our dataset doesn’t have great examples of these, we’ll just generate two random normal vectors and make a scatterplot to compare them.</p>
 <pre class="r"><code>x &lt;- rnorm(1000, 0, 1)
 y &lt;- rnorm(1000, 0, 1)
@@ -594,7 +609,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
