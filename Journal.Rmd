@@ -23,6 +23,10 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 How should we proceed with exploratory data analysis? For this session we're going to be using a dataset that I made up. We will soon use real data, but for now I'm trying to make things simple. 
 
+EDA is one of the most important skills of a statistician. It is what I do whenever I open a new dataset. It requires careful thinking and analysis, and is not something that can be replaced by a machine (yet). 
+
+Throughout this post I use text from DVB and HS.
+
 
 # Load data
 
@@ -82,11 +86,32 @@ Then we can get a table, same as above, but using the piping operator. It can be
 dat$gender %>% table()
 ```
 
-We could also make a histogram of gender, but it's less interesting.
+# (Bar chart or bar plot)
+
+We could also make a barchart or barplot of gender.
 ```{r}
 # Histogram of gender.
-hist(as.numeric(as.factor((dat$gender))), main="Histogram of gender", xlab="Gender")
+counts <- table(dat$gender)
+barplot(counts, main="Gender Distribution", xlab="Gender", names=c("Female", "Male"))
 ```
+
+A bar chart displays the distribution of a categorical variable, showing the counts for each category next to each other for easy comparison. Bar charts should have small spaces between the bars to indicate that these are freestanding bars that could be rearranged into any order. 
+
+# (Pie chart)
+
+Pie charts are just like bar charts, but put in a circle. They are overused, and they often do not make it easier to understand what is going on with the data. 
+
+See Edward Tufte's post about pie charts: https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=00018S
+
+```{r}
+# Histogram of gender.
+counts <- table(dat$gender)
+pie(counts, labels=c("Female", "Male"), main="Gender Distribution")
+```
+
+
+
+
 
 # Crime type
 
@@ -164,6 +189,8 @@ p + theme_excel()
 
 
 With practice, histograms are one of the best ways to quickly learn a lot about your data, including central tendency, spread, modality, shape and outliers. 
+
+
 
 
 # Number of convictions
