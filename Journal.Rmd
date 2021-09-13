@@ -110,9 +110,6 @@ pie(counts, labels=c("Female", "Male"), main="Gender Distribution")
 ```
 
 
-
-
-
 # Crime type
 
 What about crime type?
@@ -239,6 +236,16 @@ Cross-tabulation is the basic bivariate non-graphical EDA technique.
 ```{r}
 table(dat$race, dat$number.of.convictions)
 ```
+
+# (Side-by-side bar chart)
+
+Side-by-side bar charts are also nice.
+```{r, fig.width = 10, fig.height = 6}
+barplot(table(factor(dat$race), dat$number.of.convictions), beside=T, 
+col=c("gray20", "gray40", "gray60", "gray80", "gray100"))
+legend("topright", levels(factor(dat$race)), col=c("gray20", "gray40", "gray60", "gray80", "gray100"), pch=15)
+```
+
 
 # (Boxplot)
 
