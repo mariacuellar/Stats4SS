@@ -215,10 +215,7 @@ What does the boxplot mean? Boxplots show robust measures of location and spread
 
 Side-by-side boxplots are the best graphical EDA technique for examining the relationship between a categorical variable and a quantitative variable, as well as the distribution of the quantitative variable at each level of the categorical variable.
 
-<a href = "https://mariacuellar.github.io">
-![](images/boxplot.jpg)
-..
-
+![Descroption of boxplot.](images/boxplot.jpg)
 How is age related to number of convictions?
 ```{r}
 plot(dat$age, dat$number.of.convictions, xlab="Age", ylab="Convictions")
