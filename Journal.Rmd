@@ -15,129 +15,223 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 
-# NOW Now doing it without the intermediate step
-
 # Exploratory Data Analysis
 
-2021 | 9 | 12 Last compiled: `r Sys.Date()`
-
-Alright, so how do we proceed with exploratory data analysis?
-
-First, we figure out 
-1. What variables do we have?
-2. What are their types?
-3. Work with one variable at a time. 
+2021 | 9 | 13 Last compiled: `r Sys.Date()`
 
 
-IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.
+
+How should we proceed with exploratory data analysis? For this session we're going to be using a dataset that I made up. We will soon use real data, but for now I'm trying to make things simple. 
 
 
-This is an .Rmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a \# in front of your text, it will create a top level-header.
+# Load data
 
-# My first post
-
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
-
-Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left. 
-
-## Second level header
-
-You can add more headers by adding more hashtags. These won't be put into the table of contents
-
-### third level header
-
-Here's an even lower level header
-
-# My second post (note the order)
-
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
-
-I'm writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom
-
-# Adding R stuff
-
-So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place. 
-
-So, let's say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:
-
+First, it's good to have a title in your R code.
 ```{r}
-samples <- rnorm(100, mean=0, sd=1)
-hist(samples)
+# Title: EDA Lecture
+# Date: 9/12/2021
+# Author: MCuellar
 ```
 
-When you knit this R Markdown document, you will see that the histogram is printed to the page, along with the R code. This document can be set up to hide the R code in the webpage, just delete the comment (hashtag), from the cold folding option in the yaml header up top. For purposes of letting yourself see the code, and me see the code, best to keep it the way that it is. You learn all of these things and more can be customized in each R code block.
+And to load the data.
+```{r load_data}
+# Set working directory as a string variable for use in other code chunks.
+# This will depend on your local environment.
+# setwd("~/Documents/Penn/Classes/Crim 250 - Statistics for the Social Sciences/Slides/3. Exploratory data analysis/")
 
-# The big idea
+# Load the data, which is a csv file
+dat <- read.csv(file = 'simulated-crime.csv')
 
-Use this lab journal to record what you do in R. This way I will be able to see what you are doing and help you along the way. You will also be creating a repository of all the things you do. You can make posts about everything. Learning specific things in R (project unrelated), and doing things for the project that we will discuss at the beginning of the Fall semester. You can get started now by fiddling around with googling things, and trying stuff out in R. I've placed some helpful starting links in the links page on this website
-
-# What can you do right now by yourself?
-
-It's hard to learn programming when you don't have specific problems that you are trying to solve. Everything just seems abstract.
-
-I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
-
-To get the hang of journaling and solving the problems to learn programming, my suggestion is that you use this .Rmd file to solve the problems. It would look like this:
-
-# Problem 1
-
-Do simple math with numbers, addition, subtraction, multiplication, division
-
-```{r}
-1+2
-2*5
-5/3
-(1+6+4)/5
-
+# Look at the first few rows of data)
+head(dat)
 ```
 
-# Problem 2
+# Variables
 
-Put numbers into variables, do simple math on the variables
-
+Now we figure out what variables we have, and what their types are.
 ```{r}
-a<-1
-b<-2
-a+b
+# What variables are there in dat?
+names(dat)
 
-d<-c(1,2,3)
-e<-c(5,6,7)
-d+e
-d*e
-d/e
-
+# Summarize them so I can see their types quickly.
+summary(dat)
 ```
 
-# Problem 3
+We have five variables: gender, crime type, age, number of convictions, and race.
 
-Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.
+# Gender
 
+Let's start exploring gender. Gender is a categorical variable, so it can be summarized with a table. 
 ```{r}
-# for loop solution
-# i becomes the number 1 to 100 at each step of the loop
-
-
-a <- length(100) # make empty variable, set length to 100
-for (i in 1:100){
-  a[i] <-i #assigns the number in i, to the ith index of a
-}
-
-print(a)
-
-# for loop solution #2
-
-a<-c() #create empty variable using combine command
-for (i in 1:100){
-  a<-c(a,i) # keeps combining a with itself and the new number in i
-}
-print(a)
-
-# seq solution
-a <- seq(1,100,1) # look up help for seq using ?seq() in console
-print(a)
-
+# Make a table of gender.
+table(dat$gender)
 ```
 
-# Replace this with problem 4
 
-And keep going. Try to solve the problems with different scripts that provide the same solution. Good luck, Happy coding.
+Note that the code for that was putting the variable name inside the function parentheses. We can also use what's called a piping operator, which can be simpler to use. For this we first install the package and call the library.
+```{r}
+# Same as above, but with the piping operator
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr') 
+# Note, the first time you need to install.packages("dplyr), then you can just call the library.
+```
+
+Then we can get a table, same as above, but using the piping operator. It can be read like this: take the data in dat$gender and make a table out of it.
+```{r}
+dat$gender %>% table()
+```
+
+We could also make a histogram of gender, but it's less interesting.
+```{r}
+# Histogram of gender.
+hist(as.numeric(as.factor((dat$gender))), main="Histogram of gender", xlab="Gender")
+```
+
+# Crime type
+
+What about crime type?
+```{r}
+dat$crime.type %>% table()
+```
+There are eight types of crimes. These are the index crimes used by the FBI to generate its annual crime index.
+
+# Age
+
+(From HS)
+
+**Center**: The most common measure of central tendency is the mean. For skewed distribution or when there is concern about outliers, the median may be preferred. 
+
+**Spread**: The variance and standard deviation are two useful measures of spread. The variance is the mean of the squares of the individual deviations. The standard deviation is the square root of the variance. For Normally distributed data, approximately 95% of the values lie within 2 sd of the mean. The interquartile range (IQR) is a robust measure of spread.
+
+**Skewness and kurtosis**: Skewness is a measure of asymmetry. Kurtosis is a more subtle mea- sure of peakedness compared to a Gaussian distribution.
+
+For age, we can summarize the variable to get a sense for *center* and *spread*.
+```{r }
+dat$age %>% summary()
+```
+
+Uh oh. Why is the max age 999? Usually these high numbers are used as codes in the data to denote a response that was unusual somehow, such as "don't know", "refused to answer", "blank (no answer)", "legitimate skip", etc. 
+
+We will change the number 999 to be a code for "missing".
+```{r}
+dat$age <- dat$age %>% na_if(., "999")
+```
+
+We can make a histogram to quickly get a sense of *shape* (i.e., how age is distributed) and *unusual observations*.
+```{r, echo = TRUE, fig.width = 8, fig.height = 4}
+# Using base R
+hist(dat$age, main="Histogram of age", xlab="Years", ylab="Frequency")
+```
+
+There are still some very high ages! We need to make sure we get these outliers. Let's sort the data and then look at the last few values
+```{r}
+dat$age %>% sort() %>% tail()
+```
+
+Yep, there are two ages that are wrong (150 and 200), probably because of a data input error somewhere. Let's just make those NA's too.
+```{r}
+dat$age <- dat$age %>% na_if(., "150")
+dat$age <- dat$age %>% na_if(., "200")
+```
+
+Ok, now the histogram should look better.
+```{r}
+hist(dat$age, main="Histogram of age \n After removing unusual values", xlab="Years", ylab="Frequency")
+```
+
+This is the same as above, but using ggplot, which is a bit more complex to set up, but it has much more functionality.
+```{r}
+# Using ggplot and the piping %>% operator
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2') 
+p <- dat %>%
+  ggplot(., aes(x = age)) + geom_histogram(fill="#69b3a2", alpha=0.9) + labs(x="Age", y="Frequency", title="Histogram of age")
+
+p
+```
+
+```{r}
+# Using cool themes: https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
+#install.packages("ggthemes")
+library(ggthemes)
+
+p + theme_fivethirtyeight()
+p + theme_economist()
+p + theme_excel()
+```
+
+
+With practice, histograms are one of the best ways to quickly learn a lot about your data, including central tendency, spread, modality, shape and outliers. 
+
+
+# Number of convictions
+
+What about number of convictions?
+
+```{r}
+summary(dat$number.of.convictions)
+```
+
+
+How is number of convictions distributed?
+```{r}
+hist(dat$number.of.convictions, main="Number of convictions", xlab="Convictions")
+```
+
+Make an exportable figure that will be saved in the directory you're currently in. Not sure which directory you're in? Check with `r, eval=FALSE getwd()` and if you need to switch you can just use `r, eval=FALSE setwd()`.
+```{r, echo = TRUE, fig.width = 15, fig.height = 3}
+counts <- table(dat$gender, dat$crime.type)
+barplot(counts, col=c("red", "blue"), legend=TRUE)
+dev.off()
+```
+
+
+
+# Race
+
+The race categories included in this simulated dataset are the US Census categories for race: 
+
+```{r}
+table(dat$race)
+```
+
+
+# What about relationships between variables?
+
+
+[[Please remember this data is totally made up, so the conclusions reflect nothing about reality.]]
+
+How is race related to number of convictions? 
+
+Cross-tabulation is the basic bivariate non-graphical EDA technique.
+```{r}
+table(dat$race, dat$number.of.convictions)
+```
+
+It's probably easier to visualize this in a boxplot rather than a table.
+```{r, echo = TRUE, fig.width = 10, fig.height = 4}
+plot(factor(dat$race), dat$number.of.convictions, ylab="Convictions", xlab="Race", names=c("A. Indian","Asian","Black","Native Hawaii","White"))
+```
+
+What does the boxplot mean? Boxplots show robust measures of location and spread as well as providing information about symmetry and outliers.
+
+Side-by-side boxplots are the best graphical EDA technique for examining the relationship between a categorical variable and a quantitative variable, as well as the distribution of the quantitative variable at each level of the categorical variable.
+
+<a href = "https://mariacuellar.github.io">
+![](images/boxplot.jpg)
+..
+
+How is age related to number of convictions?
+```{r}
+plot(dat$age, dat$number.of.convictions, xlab="Age", ylab="Convictions")
+```
+
+A scatterplot is great when you want to compare two continuous quantitative variables. Since our dataset doesn't have great examples of these, we'll just generate two random normal vectors and make a scatterplot to compare them.
+
+```{r}
+x <- rnorm(1000, 0, 1)
+y <- rnorm(1000, 0, 1)
+
+plot(x,y, main="Scatterplot comparing x and y")
+```
+
+
+

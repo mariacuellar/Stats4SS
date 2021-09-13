@@ -26,7 +26,7 @@ This website is for students in Crim 250: Statistics for the Social Sciences to 
 ## Getting Started
 Before we meet for our next class there are few things you should try at home to get started.
 
-This video will guide you through setting up all the software you will need. For now, you don't need to understand all the details. It's most important that you set up your personal page and download the relevant programs.
+This video (https://www.youtube.com/watch?v=nc7XhQrasCM&ab_channel=ProgrammingForPsychologists) will guide you through setting up all the software you will need. For now, you don't need to understand all the details. It's most important that you set up your personal page and download the relevant programs. Note: Credit is given to Matthew Crump, a Psychology professor at CUNY, who made that awesome video.
 
 1. Download and install R on your computer. This is the R website https://www.r-project.org
 
@@ -36,13 +36,22 @@ This video will guide you through setting up all the software you will need. For
 
 4. Download and install github desktop https://desktop.github.com
 
-5. At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser. To do this you need to create an account with R-studio cloud. Create an account here https://rstudio.cloud. Note: In class we will be using a computer lab wit R-studio installed on the computers. You will have the option of using the lab computer, or bringing your own laptop, and/or using R-studio through the cloud.
+5. At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser, but we won't be doing that in this class.
 
-Don’t worry if you ran into issues with these first steps, we will address them in class on Monday.
+## So, I made the website, now how do I edit it?
 
+To edit your website, you can follow these steps.
 
+1. Click middle button: "Show in Finder". This opens a new RStudio with the file LabJournal website.Rproj. You can also just find this file in your Finder and open it up.
 
-Note: Credited is given to Matthew Crump, a Psychology professor at CUNY, who wrote much of this code.
+2. On RStudio, click: index.Rmd (or Journal.Rmd if that's the page you want to edit). Edit text and save. You can preview changes on the website by clicking Knit above the text.
+
+3. Click on: Build Website (files inside the docs folder have been changed as a result of compiling the website).
+
+4. On Github desktop: Write a description of the changes. Commit to master, push origin.
+
+5. Now reload website, and that should be it. (Did you forget your website's URL? You can find it under Github.com > Repositories > Settings > Pages).
+
 
 
 
