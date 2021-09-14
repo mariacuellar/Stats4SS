@@ -1,6 +1,38 @@
 ---
-title: "Resources"
+title: "Assignment 1"
 output: html_document
 ---
+
+
+
+This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am.
+
+General instructions for all assignments:
+
+- Use this file as the template for your submission. You can delete unnecessary text (e.g. these instructions) but make sure to keep the nicely formatted “Problem 1”, “Problem 2”, “a.”, “b.”, etc
+
+- Upload a your knitted PDF file to the Homework 01 submission section on gradescope. Name this file
+as: [PennID]_crim250_hw01.html (e.g. and “mcuellar_crim250_hw01.html”)
+
+- Each answer must be supported by written statements (unless otherwise specified)
+
+- Include the name of anyone you collaborated with at the top of the assignment
+
+
+# Problem 1
+
+Suppose 
+
+
+
+
+Here is more information about the data: https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm
+
+
+
+
+
+
+
 
 

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>EDA</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Statistics for the Social Sciences</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="EDA.html">EDA</a>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">EDA</h1>
+
+</div>
+
+
+<div id="exploratory-data-analysis" class="section level1">
+<h1>Exploratory Data Analysis</h1>
+<p>2021 | 9 | 13 Last compiled: 2021-09-13</p>
+<p>How should we proceed with exploratory data analysis? For this session we’re going to be using a dataset that I made up. We will soon use real data, but for now I’m trying to make things simple.</p>
+<p>EDA is one of the most important skills of a statistician. It is what I do whenever I open a new dataset. It requires careful thinking and analysis, and is not something that can be replaced by a machine (yet).</p>
+<p>Throughout this post I use text from DVB and HS.</p>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<p>First, it’s good to have a title in your R code.</p>
+<pre class="r"><code># Title: EDA Lecture
+# Date: 9/12/2021
+# Author: MCuellar</code></pre>
+<p>And to load the data.</p>
+<pre class="r"><code># Set working directory as a string variable for use in other code chunks.
+# This will depend on your local environment.
+# setwd(&quot;~/Documents/Penn/Classes/Crim 250 - Statistics for the Social Sciences/Slides/3. Exploratory data analysis/&quot;)
+
+# Load the data, which is a csv file
+dat &lt;- read.csv(file = &#39;simulated-crime.csv&#39;)
+
+# Look at the first few rows of data)
+head(dat)</code></pre>
+<pre><code>##   gender         crime.type age number.of.convictions
+## 1 female             murder  18                     1
+## 2   male aggravated assault  21                     1
+## 3 female aggravated assault  45                     3
+## 4   male            robbery  32                     4
+## 5 female           burglary  20                     2
+## 6   male      larceny-theft 150                     1
+##                                        race
+## 1                                     White
+## 2                 Black or African American
+## 3          American Indian or Alaska Native
+## 4                                     Asian
+## 5 Native Hawaiian or Other Pacific Islander
+## 6                                     White</code></pre>
+</div>
+<div id="variables" class="section level1">
+<h1>Variables</h1>
+<p>Now we figure out what variables we have, and what their types are.</p>
+<pre class="r"><code># What variables are there in dat?
+names(dat)</code></pre>
+<pre><code>## [1] &quot;gender&quot;                &quot;crime.type&quot;            &quot;age&quot;                  
+## [4] &quot;number.of.convictions&quot; &quot;race&quot;</code></pre>
+<pre class="r"><code># Summarize them so I can see their types quickly.
+summary(dat)</code></pre>
+<pre><code>##     gender           crime.type             age         number.of.convictions
+##  Length:54          Length:54          Min.   : 18.00   Min.   :1.000        
+##  Class :character   Class :character   1st Qu.: 21.25   1st Qu.:1.000        
+##  Mode  :character   Mode  :character   Median : 25.00   Median :2.000        
+##                                        Mean   : 49.87   Mean   :1.981        
+##                                        3rd Qu.: 28.75   3rd Qu.:3.000        
+##                                        Max.   :999.00   Max.   :4.000        
+##      race          
+##  Length:54         
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+## </code></pre>
+<p>We have five variables: gender, crime type, age, number of convictions, and race.</p>
+</div>
+<div id="gender" class="section level1">
+<h1>Gender</h1>
+<p>Let’s start exploring gender. Gender is a categorical variable, so it can be summarized with a table.</p>
+</div>
+<div id="table" class="section level1">
+<h1>(Table)</h1>
+<pre class="r"><code># Make a table of gender.
+table(dat$gender)</code></pre>
+<pre><code>## 
+## female   male 
+##     16     38</code></pre>
+<p>Note that the code for that was putting the variable name inside the function parentheses. We can also use what’s called a piping operator, which can be simpler to use. For this we first install the package and call the library.</p>
+<pre class="r"><code># Same as above, but with the piping operator
+if (!require(&#39;dplyr&#39;)) install.packages(&#39;dplyr&#39;); library(&#39;dplyr&#39;) 
+# Note, the first time you need to install.packages(&quot;dplyr), then you can just call the library.</code></pre>
+<p>Then we can get a table, same as above, but using the piping operator. It can be read like this: take the data in dat$gender and make a table out of it.</p>
+<pre class="r"><code>dat$gender %&gt;% table()</code></pre>
+<pre><code>## .
+## female   male 
+##     16     38</code></pre>
+</div>
+<div id="bar-chart-or-bar-plot" class="section level1">
+<h1>(Bar chart or bar plot)</h1>
+<p>We could also make a barchart or barplot of gender.</p>
+<pre class="r"><code># Histogram of gender.
+counts &lt;- table(dat$gender)
+barplot(counts, main=&quot;Gender Distribution&quot;, xlab=&quot;Gender&quot;, names=c(&quot;Female&quot;, &quot;Male&quot;))</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>A bar chart displays the distribution of a categorical variable, showing the counts for each category next to each other for easy comparison. Bar charts should have small spaces between the bars to indicate that these are freestanding bars that could be rearranged into any order.</p>
+</div>
+<div id="pie-chart" class="section level1">
+<h1>(Pie chart)</h1>
+<p>Pie charts are just like bar charts, but put in a circle. They are overused, and they often do not make it easier to understand what is going on with the data.</p>
+<p>See Edward Tufte’s post about pie charts: <a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=00018S" class="uri">https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=00018S</a></p>
+<pre class="r"><code># Histogram of gender.
+counts &lt;- table(dat$gender)
+pie(counts, labels=c(&quot;Female&quot;, &quot;Male&quot;), main=&quot;Gender Distribution&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="crime-type" class="section level1">
+<h1>Crime type</h1>
+<p>What about crime type?</p>
+<pre class="r"><code>dat$crime.type %&gt;% table()</code></pre>
+<pre><code>## .
+##  aggravated assault               arson            burglary       forcible rape 
+##                   5                   9                   9                   4 
+##       larceny-theft motor vehicle theft              murder             robbery 
+##                   6                   8                   4                   9</code></pre>
+<p>There are eight types of crimes. These are the index crimes used by the FBI to generate its annual crime index.</p>
+</div>
+<div id="age" class="section level1">
+<h1>Age</h1>
+<p>(From HS)</p>
+<p><strong>Center</strong>: The most common measure of central tendency is the mean. For skewed distribution or when there is concern about outliers, the median may be preferred.</p>
+<p><strong>Spread</strong>: The variance and standard deviation are two useful measures of spread. The variance is the mean of the squares of the individual deviations. The standard deviation is the square root of the variance. For Normally distributed data, approximately 95% of the values lie within 2 sd of the mean. The interquartile range (IQR) is a robust measure of spread.</p>
+<p><strong>Skewness and kurtosis</strong>: Skewness is a measure of asymmetry. Kurtosis is a more subtle mea- sure of peakedness compared to a Gaussian distribution.</p>
+<p>For age, we can summarize the variable to get a sense for <em>center</em> and <em>spread</em>.</p>
+<pre class="r"><code>dat$age %&gt;% summary()</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   21.25   25.00   49.87   28.75  999.00</code></pre>
+<p>Uh oh. Why is the max age 999? Usually these high numbers are used as codes in the data to denote a response that was unusual somehow, such as “don’t know”, “refused to answer”, “blank (no answer)”, “legitimate skip”, etc.</p>
+<p>We will change the number 999 to be a code for “missing”.</p>
+<pre class="r"><code>dat$age &lt;- dat$age %&gt;% na_if(., &quot;999&quot;)</code></pre>
+</div>
+<div id="histogram" class="section level1">
+<h1>(Histogram)</h1>
+<p>We can make a histogram to quickly get a sense of <em>shape</em> (i.e., how age is distributed) and <em>unusual observations</em>.</p>
+<pre class="r"><code># Using base R
+hist(dat$age, main=&quot;Histogram of age&quot;, xlab=&quot;Years&quot;, ylab=&quot;Frequency&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p>There are still some very high ages! We need to make sure we get these outliers. Let’s sort the data and then look at the last few values</p>
+<pre class="r"><code>dat$age %&gt;% sort() %&gt;% tail()</code></pre>
+<pre><code>## [1]  40  45  45  60 150 200</code></pre>
+<p>Yep, there are two ages that are wrong (150 and 200), probably because of a data input error somewhere. Let’s just make those NA’s too.</p>
+<pre class="r"><code>dat$age &lt;- dat$age %&gt;% na_if(., &quot;150&quot;)
+dat$age &lt;- dat$age %&gt;% na_if(., &quot;200&quot;)</code></pre>
+<p>Ok, now the histogram should look better.</p>
+<pre class="r"><code>hist(dat$age, main=&quot;Histogram of age \n After removing unusual values&quot;, xlab=&quot;Years&quot;, ylab=&quot;Frequency&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>This is the same as above, but using ggplot, which is a bit more complex to set up, but it has much more functionality.</p>
+<pre class="r"><code># Using ggplot and the piping %&gt;% operator
+if (!require(&#39;ggplot2&#39;)) install.packages(&#39;ggplot2&#39;); library(&#39;ggplot2&#39;) 
+p &lt;- dat %&gt;%
+  ggplot(., aes(x = age)) + geom_histogram(fill=&quot;#69b3a2&quot;, alpha=0.9) + labs(x=&quot;Age&quot;, y=&quot;Frequency&quot;, title=&quot;Histogram of age&quot;)
+
+p</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code># Using cool themes: https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/
+#install.packages(&quot;ggthemes&quot;)
+library(ggthemes)
+
+p + theme_fivethirtyeight()</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>p + theme_economist()</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<pre class="r"><code>p + theme_excel()</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-16-3.png" width="672" /></p>
+<p>With practice, histograms are one of the best ways to quickly learn a lot about your data, including central tendency, spread, modality, shape and outliers.</p>
+</div>
+<div id="number-of-convictions" class="section level1">
+<h1>Number of convictions</h1>
+<p>What about number of convictions?</p>
+<pre class="r"><code>summary(dat$number.of.convictions)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.000   2.000   1.981   3.000   4.000</code></pre>
+<p>How is number of convictions distributed?</p>
+<pre class="r"><code>hist(dat$number.of.convictions, main=&quot;Number of convictions&quot;, xlab=&quot;Convictions&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="barplot" class="section level1">
+<h1>(Barplot)</h1>
+<p>Let’s make a barplot to see this.</p>
+<pre class="r"><code>counts &lt;- table(dat$gender, dat$crime.type)
+barplot(counts, col=c(&quot;red&quot;, &quot;blue&quot;), legend=TRUE)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-19-1.png" width="1440" /></p>
+<pre class="r"><code>dev.off()</code></pre>
+<pre><code>## null device 
+##           1</code></pre>
+</div>
+<div id="race" class="section level1">
+<h1>Race</h1>
+<p>The race categories included in this simulated dataset are the US Census categories for race:</p>
+<pre class="r"><code>table(dat$race)</code></pre>
+<pre><code>## 
+##          American Indian or Alaska Native 
+##                                         5 
+##                                     Asian 
+##                                         7 
+##                 Black or African American 
+##                                        19 
+## Native Hawaiian or Other Pacific Islander 
+##                                         3 
+##                                     White 
+##                                        20</code></pre>
+</div>
+<div id="what-about-relationships-between-variables" class="section level1">
+<h1>What about relationships between variables?</h1>
+<p>[[Please remember this data is totally made up, so the conclusions reflect nothing about reality.]]</p>
+<p>How is race related to number of convictions?</p>
+<p>Cross-tabulation is the basic bivariate non-graphical EDA technique.</p>
+<pre class="r"><code>table(dat$race, dat$number.of.convictions)</code></pre>
+<pre><code>##                                            
+##                                             1 2 3 4
+##   American Indian or Alaska Native          2 1 2 0
+##   Asian                                     4 1 1 1
+##   Black or African American                 9 7 2 1
+##   Native Hawaiian or Other Pacific Islander 0 1 2 0
+##   White                                     4 9 7 0</code></pre>
+</div>
+<div id="side-by-side-bar-chart" class="section level1">
+<h1>(Side-by-side bar chart)</h1>
+<p>Side-by-side bar charts are also nice.</p>
+<pre class="r"><code>barplot(table(factor(dat$race), dat$number.of.convictions), beside=T, 
+col=c(&quot;gray20&quot;, &quot;gray40&quot;, &quot;gray60&quot;, &quot;gray80&quot;, &quot;gray100&quot;))
+legend(&quot;topright&quot;, levels(factor(dat$race)), col=c(&quot;gray20&quot;, &quot;gray40&quot;, &quot;gray60&quot;, &quot;gray80&quot;, &quot;gray100&quot;), pch=15)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-22-1.png" width="960" /></p>
+</div>
+<div id="boxplot" class="section level1">
+<h1>(Boxplot)</h1>
+<p>It’s probably easier to visualize this in a boxplot rather than a table.</p>
+<pre class="r"><code>plot(factor(dat$race), dat$number.of.convictions, ylab=&quot;Convictions&quot;, xlab=&quot;Race&quot;, names=c(&quot;A. Indian&quot;,&quot;Asian&quot;,&quot;Black&quot;,&quot;Native Hawaii&quot;,&quot;White&quot;))</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-23-1.png" width="960" /></p>
+<p>What does the boxplot mean? Boxplots show robust measures of location and spread as well as providing information about symmetry and outliers.</p>
+<p>Side-by-side boxplots are the best graphical EDA technique for examining the relationship between a categorical variable and a quantitative variable, as well as the distribution of the quantitative variable at each level of the categorical variable.</p>
+<p><img src="images/boxplot.jpg" alt="Descroption of boxplot." /> How is age related to number of convictions? This next plot is a scatterplot, but it’s kind of a strange one that doesn’t tell us much because there is not much variability in number of convictions.</p>
+<pre class="r"><code>plot(dat$age, dat$number.of.convictions, xlab=&quot;Age&quot;, ylab=&quot;Convictions&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="scatterplot" class="section level1">
+<h1>(Scatterplot)</h1>
+<p>A scatterplot is great when you want to compare two continuous quantitative variables. Since our dataset doesn’t have great examples of these, we’ll just generate two random normal vectors and make a scatterplot to compare them.</p>
+<pre class="r"><code>x &lt;- rnorm(1000, 0, 1)
+y &lt;- rnorm(1000, 0, 1)
+
+plot(x,y, main=&quot;Scatterplot comparing x and y&quot;)</code></pre>
+<p><img src="EDA_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
