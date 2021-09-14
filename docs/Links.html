@@ -267,14 +267,76 @@ $(document).ready(function () {
 </div>
 
 
-<p>This assignment is due on Canvas on Monday 9/20.</p>
-<p>General instructions for all assignments:</p>
+<p>This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am.</p>
+<div id="general-instructions-for-all-assignments" class="section level1">
+<h1>General instructions for all assignments:</h1>
 <ul>
 <li><p>Use this file as the template for your submission. You can delete unnecessary text (e.g. these instructions) but make sure to keep the nicely formatted “Problem 1”, “Problem 2”, “a.”, “b.”, etc</p></li>
-<li><p>Upload a your knitted PDF file to the Homework 01 submission section on gradescope. Name this file as: [SwatID]_stat11_hw01.html (e.g. and “aluby1_stat11_hw01.html”)</p></li>
+<li><p>Upload a your knitted PDF file to the Homework 01 submission section on gradescope. Name this file as: [PennID]_crim250_hw01.html (e.g. and “mcuellar_crim250_hw01.html”)</p></li>
 <li><p>Each answer must be supported by written statements (unless otherwise specified)</p></li>
 <li><p>Include the name of anyone you collaborated with at the top of the assignment</p></li>
 </ul>
+</div>
+<div id="assignment-1" class="section level1">
+<h1>Assignment 1</h1>
+<ol style="list-style-type: decimal">
+<li>Install the datasets package and load the library using this code:</li>
+</ol>
+<pre class="r"><code>#install.packages(&quot;datasets&quot;)
+library(datasets)</code></pre>
+<p>Load the USArrests dataset and rename it dat. Note that this dataset comes with R, in the package datasets, so there’s no need to load data from your computer. Why is it useful to rename the dataset?</p>
+<pre class="r"><code>dat &lt;- USArrests</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Use this command to make the state names into a new variable called State. (This dataset has the state names as row names, so we just want to make them into a new variable. We also make them all lower case, because that will help us draw a map later - the map function requires the states to be lower case.)</li>
+</ol>
+<pre class="r"><code>dat$state &lt;- tolower(rownames(USArrests))</code></pre>
+<p>List the variables in the dataset <code>USArrests</code>.</p>
+<pre class="r"><code>names(dat)</code></pre>
+<pre><code>## [1] &quot;Murder&quot;   &quot;Assault&quot;  &quot;UrbanPop&quot; &quot;Rape&quot;     &quot;state&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What type of variable (from the DVB chapter) is Murder?</li>
+</ol>
+<p>Answer: Quantitative</p>
+<p>What R Type of variable is it?</p>
+<pre class="r"><code>class(dat$Murder)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>What is this dataset showing? What do the numbers mean?</p></li>
+<li><p>Draw a histogram of Murder with proper labels and title.</p></li>
+</ol>
+<pre class="r"><code>hist(dat$Murder, main=&quot;Murder&quot;, xlab=&quot;Murders&quot;)</code></pre>
+<p><img src="Links_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Please summarize Murder quantitatively. What are its mean and median? What is the difference between mean and median? What is a quartile, and why do you think R gives you the 1st Qu. and 3rd Qu.?</li>
+</ol>
+<pre class="r"><code>summary(dat$Murder)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.800   4.075   7.250   7.788  11.250  17.400</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Repeat the same steps you followed for Murder, for the variables Assault and Rape. Now plot all three histograms together by using the command <code>par(mfrow=c(3,1))</code> and then plotting each of the three.</li>
+</ol>
+<pre class="r"><code>par(mfrow=c(3,1))
+hist(dat$Murder)
+hist(dat$Assault)
+hist(dat$Rape)</code></pre>
+<p><img src="Links_files/figure-html/unnamed-chunk-8-1.png" width="480" /></p>
+<p>What does the command par do, in your own words (you can look this up by asking R <code>?par</code>)?</p>
+<pre class="r"><code>?par</code></pre>
+<p>What can you learn from plotting the histograms together?</p>
+<p>Answer: It helps you compare them, and their properties, especially center and spread.</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Run this code:</li>
+</ol>
+<pre class="r"><code>library(&#39;maps&#39;) 
+library(&#39;ggplot2&#39;) 
+
+ggplot(dat, aes(map_id=state, fill=Murder)) + 
+  geom_map(map=map_data(&quot;state&quot;)) + 
+  expand_limits(x=map_data(&quot;state&quot;)$long, y=map_data(&quot;state&quot;)$lat)</code></pre>
+<p><img src="Links_files/figure-html/unnamed-chunk-10-1.png" width="720" /></p>
+<p>What does this code do? Explain what each line is doing.</p>
+<p>Answer: It makes a map. Read <code>?geom_map</code>.</p>
+</div>
 
 
 
