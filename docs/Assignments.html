@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -218,6 +221,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -225,6 +291,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -248,9 +324,6 @@ $(document).ready(function () {
   <a href="EDA.html">EDA</a>
 </li>
 <li>
-  <a href="Lectures.html">Lectures</a>
-</li>
-<li>
   <a href="Assignments.html">Assignments</a>
 </li>
       </ul>
@@ -270,10 +343,76 @@ $(document).ready(function () {
 </div>
 
 
-<p><a href="somePages/Assignment-1.html">Click here for Assignment 1</a> #no space, no {r}</p>
+<p>This page will contain all the assignments you submit for the class.</p>
+<div id="assignment-1" class="section level1">
+<h1>Assignment 1</h1>
+<p>This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am. Include the name of anyone with whom you collaborated at the top of the assignment</p>
+<ol style="list-style-type: decimal">
+<li><p>Download the Assignment1.Rmd file from Canvas. This will be your template for submitting your assignment.</p></li>
+<li><p>On RStudio, open a new R script in RStudio (File &gt; New File &gt; R Script). This is where you’ll write and run your code in R.</p></li>
+<li><p>Once you have finalized your code, copy and paste your results into this template. Answer the questions and Save.</p></li>
+<li><p>Knit to PDF, locate the PDF file in your docs folder (it’s in the same folder as the Rproj), and submit that on on Canvas.</p></li>
+<li><p>Build Website,</p></li>
+</ol>
+<div id="problem-1" class="section level3">
+<h3>Problem 1</h3>
+<p>Install the datasets package on the console below using <code>install.packages("datasets")</code>. Now load the library.</p>
+<p>Load the USArrests dataset and rename it dat. Note that this dataset comes with R, in the package datasets, so there’s no need to load data from your computer. Why is it useful to rename the dataset?</p>
+</div>
+<div id="problem-2" class="section level3">
+<h3>Problem 2</h3>
+<p>Use this command to make the state names into a new variable called State. (This dataset has the state names as row names, so we just want to make them into a new variable. We also make them all lower case, because that will help us draw a map later - the map function requires the states to be lower case.)</p>
+<p>List the variables in the dataset <code>USArrests</code>.</p>
+</div>
+<div id="problem-3" class="section level3">
+<h3>Problem 3</h3>
+<p>What type of variable (from the DVB chapter) is Murder?</p>
+<p>Answer:</p>
+<p>What R Type of variable is it?</p>
+<p>Answer:</p>
+</div>
+<div id="problem-4" class="section level3">
+<h3>Problem 4</h3>
+<p>What is this dataset showing? What do the numbers mean?</p>
+<p>Answer:</p>
+</div>
+<div id="problem-5" class="section level3">
+<h3>Problem 5</h3>
+<p>Draw a histogram of Murder with proper labels and title.</p>
+</div>
+<div id="problem-6" class="section level3">
+<h3>Problem 6</h3>
+<p>Please summarize Murder quantitatively. What are its mean and median? What is the difference between mean and median? What is a quartile, and why do you think R gives you the 1st Qu. and 3rd Qu.?</p>
+</div>
+<div id="problem-7" class="section level3">
+<h3>Problem 7</h3>
+<p>Repeat the same steps you followed for Murder, for the variables Assault and Rape. Now plot all three histograms together by using the command <code>par(mfrow=c(3,1))</code> and then plotting each of the three.</p>
+<p>What does the command par do, in your own words (you can look this up by asking R <code>?par</code>)?</p>
+<p>Answer:</p>
+<p>What can you learn from plotting the histograms together?</p>
+<p>Answer:</p>
+</div>
+<div id="problem-8" class="section level3">
+<h3>Problem 8</h3>
+<p>Delete the hashtags below and run this code, after installing the packages maps and ggplot2 in the console:</p>
+<pre class="r"><code>#library(&#39;maps&#39;) 
+#library(&#39;ggplot2&#39;) 
+
+#ggplot(dat, aes(map_id=state, fill=Murder)) + 
+#  geom_map(map=map_data(&quot;state&quot;)) + 
+#  expand_limits(x=map_data(&quot;state&quot;)$long, y=map_data(&quot;state&quot;)$lat)</code></pre>
+<p>What does this code do? Explain what each line is doing.</p>
+<p>Answer:</p>
+</div>
+</div>
+<div id="assignment-2-coming-soon" class="section level1">
+<h1>Assignment 2 (Coming soon)</h1>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -306,6 +445,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
