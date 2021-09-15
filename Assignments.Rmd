@@ -1,15 +1,15 @@
 ---
 title: "Assignments"
 output:
+  pdf_document:
+    toc: no
+    toc_depth: '1'
   html_document:
     toc: yes
     toc_float: yes
     collapsed: no
     number_sections: no
     toc_depth: 1
-  pdf_document:
-    toc: no
-    toc_depth: '1'
 ---
 
 
@@ -48,14 +48,19 @@ This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am. Inclu
 Install the datasets package on the console below using `install.packages("datasets")`. Now load the library.
 
 ```{r}
-
+library(datasets)
 ```
+
+Answer: I've loaded the library!
 
 Load the USArrests dataset and rename it `dat`. Note that this dataset comes with R, in the package datasets, so there's no need to load data from your computer. Why is it useful to rename the dataset?
 
 ```{r}
-
+dat <- USArrests # this line is renaming the data
 ```
+
+**Answer:** Well, we want to replicate analyses. That's why it's nice to rename data.
+
 
 ### Problem 2
 
@@ -71,8 +76,13 @@ This dataset has the state names as row names, so we just want to make them into
 List the variables contained in the dataset `USArrests`.
 
 ```{r}
-
+names(dat)
+# Hey professor, the four variables are Murder, Assault, UrbanPop, Rape.
 ```
+
+
+
+
 
 ### Problem 3 
 

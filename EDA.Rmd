@@ -73,7 +73,6 @@ Let's start exploring gender. Gender is a categorical variable, so it can be sum
 table(dat$gender)
 ```
 
-
 Note that the code for that was putting the variable name inside the function parentheses. We can also use what's called a piping operator, which can be simpler to use. For this we first install the package and call the library.
 ```{r}
 # Same as above, but with the piping operator
