@@ -13,6 +13,9 @@ output:
 ---
 
 
+[Assgnmtn1](https://mariacuellar.github.io/Stats4SS/docs/somePages/Assignment-1.html) #no space, no {r}
+
+
 
 This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am. Include the name of anyone you collaborated with at the top of the assignment
 

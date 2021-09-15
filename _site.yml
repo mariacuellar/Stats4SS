@@ -6,6 +6,8 @@ navbar:
       href: index.html
     - text: "EDA"
       href: EDA.html
+    - text: "Lectures"
+      href: Lectures.html
     - text: "Assignments"
       href: Assignments.html
 output_dir: "docs"
