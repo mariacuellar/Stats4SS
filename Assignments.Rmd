@@ -13,7 +13,7 @@ output:
 ---
 
 
-[Assgnmtn1](https://mariacuellar.github.io/Stats4SS/docs/somePages/Assignment-1.html) #no space, no {r}
+[Assgnmtn1](https://mariacuellar.github.io/Stats4SS/somePages/Assignment-1.html) #no space, no {r}
 
 
 
