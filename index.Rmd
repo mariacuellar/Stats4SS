@@ -5,20 +5,6 @@ output:
   html_document: default
 ---
 
-<style type="text/css">
-.title {
-  display: none;
-}
-
-#getting-started img {
-  margin-right: 10px;
-}
-
-</style>
-
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
-
 # **Statistics for the Social Sciences**
 
 This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.
@@ -53,12 +39,3 @@ To edit your website, you can follow these steps.
 5. Now reload website, and that should be it. (Did you forget your website's URL? You can find it under Github.com > Repositories > Settings > Pages).
 
 
-
-
-</div>
-<div class="col-sm-6">
-
-<a href = "https://mariacuellar.github.io">
-![](images/stats.jpg)
-</a>
-</div>
