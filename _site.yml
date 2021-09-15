@@ -1,11 +1,11 @@
-name: "Statistics for the Social Sciences"
+name: "Statistics for the Social Sciences (Crim 250)"
 navbar:
-  title: "Statistics for the Social Sciences"
+  title: "Statistics for the Social Sciences (Crim 250)"
   left:
     - text: "Home"
       href: index.html
     - text: "EDA"
       href: EDA.html
-    - text: "Links"
-      href: Links.html
+    - text: "Assignments"
+      href: Assignments.html
 output_dir: "docs"

@@ -11,7 +11,7 @@
 
 
 
-<title>Statistics for the Social Sciences</title>
+<title>Assignments</title>
 
 <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -262,51 +262,68 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Statistics for the Social Sciences</h1>
+<h1 class="title toc-ignore">Assignments</h1>
 
 </div>
 
 
-<style type="text/css">
-.title {
-  display: none;
-}
-
-#getting-started img {
-  margin-right: 10px;
-}
-
-</style>
-<div class="row" style="padding-top: 30px;">
-<div id="statistics-for-the-social-sciences" class="section level1 col-sm-6">
-<h1><strong>Statistics for the Social Sciences</strong></h1>
-<p>This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.</p>
-<div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
-<p>Before we meet for our next class there are few things you should try at home to get started.</p>
-<p>This video (<a href="https://www.youtube.com/watch?v=nc7XhQrasCM&amp;ab_channel=ProgrammingForPsychologists" class="uri">https://www.youtube.com/watch?v=nc7XhQrasCM&amp;ab_channel=ProgrammingForPsychologists</a>) will guide you through setting up all the software you will need. For now, you don’t need to understand all the details. It’s most important that you set up your personal page and download the relevant programs. Note: Credit is given to Matthew Crump, a Psychology professor at CUNY, who made that awesome video.</p>
+<p>This assignment is due on Canvas on Monday 9/20 before class, at 10:15 am. Include the name of anyone you collaborated with at the top of the assignment</p>
 <ol style="list-style-type: decimal">
-<li><p>Download and install R on your computer. This is the R website <a href="https://www.r-project.org" class="uri">https://www.r-project.org</a></p></li>
-<li><p>Download and install R-studio. You must download and install R first before installing R-studio. The R-studio website is <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a></p></li>
-<li><p>Create a free github account. The github website is <a href="https://github.com" class="uri">https://github.com</a></p></li>
-<li><p>Download and install github desktop <a href="https://desktop.github.com" class="uri">https://desktop.github.com</a></p></li>
-<li><p>At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser, but we won’t be doing that in this class.</p></li>
+<li><p>Download the Assignment1.Rmd file from Canvas. This will be your template for submitting your assignment.</p></li>
+<li><p>On RStudio, open a new R script in RStudio (File &gt; New File &gt; R Script). This is where you’ll write and run your code in R.</p></li>
+<li><p>Once you have finalized your code, copy and paste your results into this template. Answer the questions and Save.</p></li>
+<li><p>Knit to PDF, locate the PDF file in your docs folder (it’s in the same folder as the Rproj), and submit that on on Canvas.</p></li>
+<li><p>Build Website,</p></li>
 </ol>
+<div id="problem-1" class="section level1">
+<h1>Problem 1</h1>
+<p>Install the datasets package on the console below using <code>install.packages("datasets")</code>. Now load the library.</p>
+<p>Load the USArrests dataset and rename it dat. Note that this dataset comes with R, in the package datasets, so there’s no need to load data from your computer. Why is it useful to rename the dataset?</p>
 </div>
-<div id="so-i-made-the-website-now-how-do-i-edit-it" class="section level2">
-<h2>So, I made the website, now how do I edit it?</h2>
-<p>To edit your website, you can follow these steps.</p>
-<ol style="list-style-type: decimal">
-<li><p>Click middle button: “Show in Finder”. This opens a new RStudio with the file LabJournal website.Rproj. You can also just find this file in your Finder and open it up.</p></li>
-<li><p>On RStudio, click: index.Rmd (or Journal.Rmd if that’s the page you want to edit). Edit text and save. You can preview changes on the website by clicking Knit above the text.</p></li>
-<li><p>Click on: Build Website (files inside the docs folder have been changed as a result of compiling the website).</p></li>
-<li><p>On Github desktop: Write a description of the changes. Commit to master, push origin.</p></li>
-<li><p>Now reload website, and that should be it. (Did you forget your website’s URL? You can find it under Github.com &gt; Repositories &gt; Settings &gt; Pages).</p></li>
-</ol>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<p>Use this command to make the state names into a new variable called State. (This dataset has the state names as row names, so we just want to make them into a new variable. We also make them all lower case, because that will help us draw a map later - the map function requires the states to be lower case.)</p>
+<p>List the variables in the dataset <code>USArrests</code>.</p>
 </div>
+<div id="problem-3" class="section level1">
+<h1>Problem 3</h1>
+<p>What type of variable (from the DVB chapter) is Murder?</p>
+<p>Answer:</p>
+<p>What R Type of variable is it?</p>
+<p>Answer:</p>
 </div>
-<div class="col-sm-6">
-<p><a href = "https://mariacuellar.github.io"> <img src="images/stats.jpg" /> </a></p>
+<div id="problem-4" class="section level1">
+<h1>Problem 4</h1>
+<p>What is this dataset showing? What do the numbers mean?</p>
+<p>Answer:</p>
+</div>
+<div id="problem-5" class="section level1">
+<h1>Problem 5</h1>
+<p>Draw a histogram of Murder with proper labels and title.</p>
+</div>
+<div id="problem-6" class="section level1">
+<h1>Problem 6</h1>
+<p>Please summarize Murder quantitatively. What are its mean and median? What is the difference between mean and median? What is a quartile, and why do you think R gives you the 1st Qu. and 3rd Qu.?</p>
+</div>
+<div id="problem-7" class="section level1">
+<h1>Problem 7</h1>
+<p>Repeat the same steps you followed for Murder, for the variables Assault and Rape. Now plot all three histograms together by using the command <code>par(mfrow=c(3,1))</code> and then plotting each of the three.</p>
+<p>What does the command par do, in your own words (you can look this up by asking R <code>?par</code>)?</p>
+<p>Answer:</p>
+<p>What can you learn from plotting the histograms together?</p>
+<p>Answer:</p>
+</div>
+<div id="problem-8" class="section level1">
+<h1>Problem 8</h1>
+<p>Delete the hashtags below and run this code, after installing the packages maps and ggplot2 in the console:</p>
+<pre class="r"><code>#library(&#39;maps&#39;) 
+#library(&#39;ggplot2&#39;) 
+
+#ggplot(dat, aes(map_id=state, fill=Murder)) + 
+#  geom_map(map=map_data(&quot;state&quot;)) + 
+#  expand_limits(x=map_data(&quot;state&quot;)$long, y=map_data(&quot;state&quot;)$lat)</code></pre>
+<p>What does this code do? Explain what each line is doing.</p>
+<p>Answer:</p>
 </div>
 
 
