@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -218,6 +221,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -225,6 +291,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -267,11 +343,12 @@ $(document).ready(function () {
 </div>
 
 
-<div id="statistics-for-the-social-sciences" class="section level1">
-<h1><strong>Statistics for the Social Sciences</strong></h1>
+<div id="statistics-for-the-social-sciences" class="section level1 unlisted unnumbered">
+<h1 class="unlisted unnumbered"><strong>Statistics for the Social Sciences</strong></h1>
 <p>This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.</p>
-<div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting Started</h1>
 <p>Before we meet for our next class there are few things you should try at home to get started.</p>
 <p>This video (<a href="https://www.youtube.com/watch?v=nc7XhQrasCM&amp;ab_channel=ProgrammingForPsychologists" class="uri">https://www.youtube.com/watch?v=nc7XhQrasCM&amp;ab_channel=ProgrammingForPsychologists</a>) will guide you through setting up all the software you will need. For now, you don’t need to understand all the details. It’s most important that you set up your personal page and download the relevant programs. Note: Credit is given to Matthew Crump, a Psychology professor at CUNY, who made that awesome video.</p>
 <ol style="list-style-type: decimal">
@@ -282,8 +359,8 @@ $(document).ready(function () {
 <li><p>At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser, but we won’t be doing that in this class.</p></li>
 </ol>
 </div>
-<div id="so-i-made-the-website-now-how-do-i-edit-it" class="section level2">
-<h2>So, I made the website, now how do I edit it?</h2>
+<div id="so-i-made-the-website-now-how-do-i-edit-it" class="section level1">
+<h1>So, I made the website, now how do I edit it?</h1>
 <p>To edit your website, you can follow these steps.</p>
 <ol style="list-style-type: decimal">
 <li><p>Click middle button: “Show in Finder”. This opens a new RStudio with the file LabJournal website.Rproj. You can also just find this file in your Finder and open it up.</p></li>
@@ -293,10 +370,31 @@ $(document).ready(function () {
 <li><p>Now reload website, and that should be it. (Did you forget your website’s URL? You can find it under Github.com &gt; Repositories &gt; Settings &gt; Pages).</p></li>
 </ol>
 </div>
+<div id="how-do-i-change-the-titles-of-the-pages" class="section level1">
+<h1>How do I change the titles of the pages?</h1>
+<p>This renames Journal as Assignments.</p>
+<ol style="list-style-type: decimal">
+<li><p>In Journal.Rmd, change the title at the top to title: “Assignments”, save.</p></li>
+<li><p>On RStudio, open _site.yml. Change the text and href to match the name you want, e.g. replace “Journal” to “Assignments”.</p></li>
+<li><p>On RStudio, on the bottom right where you see your Files, click the box to the left of Journal.RmD and then click Rename (a button right above). Rename as Assignments.Rmd.</p></li>
+<li><p>Select the boxes for Journal_cache and Journal_files, and click Delete (button above). In the folder docs, select the files Journal.html and Journal_files, and delete those as well.</p></li>
+<li><p>Save, Build website. Go to GitHub desktop, commit and push.</p></li>
+</ol>
+</div>
+<div id="how-do-i-add-a-new-page" class="section level1">
+<h1>How do I add a new page?</h1>
+<ol style="list-style-type: decimal">
+<li><p>In _site.yml, copy the two lines “- text:”Assignments" and “href: RBasics.html”, and paste them right below the ones you copied. Change the name to whatever you like, e.g., “New Page”.</p></li>
+<li><p>In RStudio, select the box to the left of the file Assignments.Rmd, click More above, and select Copy. Enter a new name, e.g. NewPage.Rmd.</p></li>
+<li><p>In RStudio, go into the NewPage.Rmd file and edit the title and text.</p></li>
+<li><p>Save, Build website. Go to GitHub desktop, commit and push.</p></li>
+</ol>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -329,6 +427,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

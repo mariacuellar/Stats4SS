@@ -2,14 +2,20 @@
 title: "Statistics for the Social Sciences"
 output:
   pdf_document: default
-  html_document: default
+  html_document:
+    toc: yes
+    toc_float: yes
+    collapsed: no
+    number_sections: no
+    toc_depth: 1
+
 ---
 
-# **Statistics for the Social Sciences**
+# **Statistics for the Social Sciences** {.unlisted .unnumbered}
 
 This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.
 
-## Getting Started
+# Getting Started
 Before we meet for our next class there are few things you should try at home to get started.
 
 This video (https://www.youtube.com/watch?v=nc7XhQrasCM&ab_channel=ProgrammingForPsychologists) will guide you through setting up all the software you will need. For now, you don't need to understand all the details. It's most important that you set up your personal page and download the relevant programs. Note: Credit is given to Matthew Crump, a Psychology professor at CUNY, who made that awesome video.
@@ -24,7 +30,7 @@ This video (https://www.youtube.com/watch?v=nc7XhQrasCM&ab_channel=ProgrammingFo
 
 5. At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser, but we won't be doing that in this class.
 
-## So, I made the website, now how do I edit it?
+# So, I made the website, now how do I edit it?
 
 To edit your website, you can follow these steps.
 
@@ -37,5 +43,38 @@ To edit your website, you can follow these steps.
 4. On Github desktop: Write a description of the changes. Commit to master, push origin.
 
 5. Now reload website, and that should be it. (Did you forget your website's URL? You can find it under Github.com > Repositories > Settings > Pages).
+
+
+# How do I change the titles of the pages?
+
+This renames Journal as Assignments.
+
+1. In Journal.Rmd, change the title at the top to title: "Assignments", save. 
+
+2. On RStudio, open _site.yml. Change the text and href to match the name you want, e.g. replace "Journal" to "Assignments".
+
+3. On RStudio, on the bottom right where you see your Files, click the box to the left of Journal.RmD and then click Rename (a button right above). Rename as Assignments.Rmd. 
+4. Select the boxes for Journal_cache and Journal_files, and click Delete (button above). In the folder docs, select the files Journal.html and Journal_files, and delete those as well.
+
+5. Save, Build website. Go to GitHub desktop, commit and push. 
+
+
+# How do I add a new page?
+
+1. In _site.yml, copy the two lines "- text: "Assignments" and "href: RBasics.html",  and paste them right below the ones you copied. Change the name to whatever you like, e.g., "New Page".
+
+2. In RStudio, select the box to the left of the file Assignments.Rmd, click More above, and select Copy. Enter a new name, e.g. NewPage.Rmd. 
+
+3. In RStudio, go into the NewPage.Rmd file and edit the title and text.
+
+5. Save, Build website. Go to GitHub desktop, commit and push. 
+
+
+
+
+
+
+
+
 
 
