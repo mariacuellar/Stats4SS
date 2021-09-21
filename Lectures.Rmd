@@ -1,20 +1,28 @@
 ---
-title: "Lectures"
+title: "Lecture notes"
+author: "Maria Cuellar"
+site: bookdown::bookdown_site
+documentclass: book
 output:
-  html_document:
-    toc: true
-    toc_float: true
-    collapsed: false
-    number_sections: false
-    toc_depth: 2
-    #code_folding: hide
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
-```
 
+# **Lectures**
 
-# Lectures 
+# Statistics for the Social Sciences
+a
 
-Lecture 1
+# Trying out second chapter
+a
+
+# Trying out second chapter
+a
+
+# Trying out second chapter
+a
+
+# Trying out second chapter
+
+<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
