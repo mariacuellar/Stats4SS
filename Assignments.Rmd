@@ -1,15 +1,15 @@
 ---
 title: "Assignments"
 output:
-  pdf_document:
-    toc: no
-    toc_depth: '1'
   html_document:
     toc: yes
     toc_float: yes
     collapsed: no
     number_sections: no
     toc_depth: 1
+  pdf_document:
+    toc: no
+    toc_depth: '1'
 ---
 
 
@@ -66,7 +66,7 @@ dat <- USArrests # this line is renaming the data
 
 Use this command to make the state names into a new variable called State. 
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 dat$state <- tolower(rownames(USArrests))
 ```
 
@@ -139,9 +139,9 @@ In the console below (not in text), type `install.packages("maps")` and press En
 
 Run this code:
 
-```{r, eval = FALSE, fig.width = 7.5, fig.height = 4}
-library('maps') 
-library('ggplot2') 
+```{r, eval = TRUE, fig.width = 7.5, fig.height = 4}
+library(maps) 
+library(ggplot2) 
 
 ggplot(dat, aes(map_id=state, fill=Murder)) + 
   geom_map(map=map_data("state")) + 

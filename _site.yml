@@ -7,5 +7,5 @@ navbar:
     - text: "EDA"
       href: EDA.html
     - text: "Assignments"
-      href: Assignments.html
+      href: assignments.html
 output_dir: "docs"
