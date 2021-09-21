@@ -14,15 +14,15 @@ output:
 # Statistics for the Social Sciences
 a
 
-# Trying out second chapter
+# Chp2
 a
 
-# Trying out second chapter
+# Chp3
 a
 
-# Trying out second chapter
+# Chp4
 a
 
-# Trying out second chapter
+# Chp5
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
