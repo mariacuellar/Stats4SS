@@ -8,6 +8,4 @@ navbar:
       href: EDA.html
     - text: "Assignments"
       href: assignments.html
-    - text: "Lectures"
-      href: lectures.html
 output_dir: "docs"
