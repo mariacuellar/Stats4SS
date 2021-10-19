@@ -353,8 +353,9 @@ div.tocify {
 <pre class="r"><code># install.packages(&quot;datasets&quot;) # only run this once per session!
 library(datasets)</code></pre>
 <p>The data give the speed of cars (in miles per hour, mph) and the distances taken to stop (in miles). The data were recorded in the 1920s.</p>
-<div id="scatterplot" class="section level2">
-<h2>Scatterplot</h2>
+</div>
+<div id="scatterplot" class="section level1">
+<h1>(Scatterplot)</h1>
 <p>This is what the scatterplot of speed vs distance looks like.</p>
 <pre class="r"><code>library(datasets)
 plot(cars$speed, cars$dist,  main=&quot;Relationship between Speed and Stopping Distance for 50 Cars&quot;,
@@ -373,11 +374,10 @@ abline(reg.output.nc, col=&quot;blue&quot;)</code></pre>
 <pre><code>## [1] 0.8068949</code></pre>
 <p>So, the fact that the relationship looks linear tells us that perhaps a simple linear regression is a good model to fit to this dataset. That regression model will serve as a tool for us to be able to perform inferences (e.g. if I observe a higher stopping distance, is this associated with a higher speed? And if so by how much?) and make predictions (e.g. for a speed of 22 mph or 50 mph, neither of which are in the dataset, what is the estimated stopping distance?).</p>
 </div>
-</div>
 <div id="linear-model" class="section level1">
 <h1>Linear model</h1>
-<div id="the-model" class="section level2">
-<h2>The model</h2>
+<div id="the-model" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">The model</h2>
 <ul>
 <li><p>The linear regression model assumes that the <em>means</em> of the distributions of y’s for each x fall along the line, even though the individuals are scattered around it.</p></li>
 <li><p>The <strong>model</strong> is <span class="math display">\[
@@ -386,15 +386,15 @@ abline(reg.output.nc, col=&quot;blue&quot;)</code></pre>
 <li><p>Are the data really going to be distributed like this?</p></li>
 </ul>
 </div>
-<div id="the-errors" class="section level2">
-<h2>The errors</h2>
+<div id="the-errors" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">The errors</h2>
 <ul>
 <li><p>No, not all the individual y’s are at these means. Some are above, some below. So, like all models, this one makes <strong>errors</strong>. They are model errors so we call them <span class="math inline">\(\epsilon\)</span>.</p></li>
 <li><p>When we include the errors, we can actually say that each individual y is along the line, with some variation, <span class="math display">\[y = \beta_0 + \beta_1 x + \epsilon,\]</span> where <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are each individual point’s <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> values, the <span class="math inline">\(\beta\)</span>s are the <strong>parameters</strong> of the model (slope and intercept), and <span class="math inline">\(\epsilon\)</span> are the model errors that soak up the deviation from the model to the actual point. This equation is true for each data point.</p></li>
 </ul>
 </div>
-<div id="the-regression-line" class="section level2">
-<h2>The regression line</h2>
+<div id="the-regression-line" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">The regression line</h2>
 <ul>
 <li><p>We estimate the <span class="math inline">\(\beta\)</span>s by finding a <strong>regression line</strong> <span class="math display">\[\hat{y} = b_0 + b_1 x,\]</span> as in the previous class. The <strong>residuals</strong>, <span class="math inline">\(e=y-\hat{y}\)</span> are the sample-based versions of the errors <span class="math inline">\(\epsilon\)</span>.</p></li>
 <li><p>We use a method called <strong>least squares regression</strong>, which minimizes the vertical distance from the data points to the regression line (the sum of the squares of the residuals), to get reasonable estimates of the parameters of this model from a random sample of data.</p></li>
@@ -454,20 +454,20 @@ summary(reg.output) # calling the summary of the fitted model</code></pre>
 <li><p>This is satisfied if a scatterplot of x and y looks straight. If the true relationship between x and y is far from linear and we use a straight line to fit the data, our entire analysis will be useless, so we always check this first.</p></li>
 <li><p><strong>How to check?</strong> You can see violations of this if you plot a scatterplot of the residuals against x or against the predicted values <span class="math inline">\(\hat{y}\)</span>. That plot will have a horizontal direction and should have no pattern if the condition is satisfied. You can think of the residuals as being estimates of the error terms. So anytime we’re looking at a plot that involves residuals, we’re doing so because we’re trying to assess whether some assumption about the errors appears to hold in our data.</p></li>
 </ul>
-<div id="residuals-vs.-x" class="section level2">
-<h2>Residuals vs. x</h2>
+</div>
+<div id="residuals-vs.-x" class="section level1">
+<h1>(Residuals vs. x)</h1>
 <pre class="r"><code>plot(cars$speed.c, reg.output$residuals, ylim=c(-15,15), main=&quot;Residuals vs. x&quot;, xlab=&quot;x, Scaled speed&quot;, ylab=&quot;Residuals&quot;)
 abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="residuals-vs.-fitted" class="section level2">
-<h2>Residuals vs. fitted</h2>
+<div id="residuals-vs.-fitted" class="section level1">
+<h1>(Residuals vs. fitted)</h1>
 <pre class="r"><code>plot(reg.output, which=1)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-7-1.png" width="480" /></p>
 <ul>
 <li>Looking at the Residuals vs Fitted plot (showing residuals on the y-axis and fitted y’s on the x-axis), we see that the red line (which is just a scatterplot smoother, showing the average value of the residuals at each value of fitted value) is quite flat. This tells us that there is no discernible non-linear trend to the residuals. Furthermore, the residuals appear to be equally variable across the entire range of fitted values. There is no indication of non-constant variance.</li>
 </ul>
-</div>
 </div>
 <div id="independence-assumption" class="section level1">
 <h1>2. Independence assumption</h1>
@@ -483,15 +483,15 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p>The variability in y should be about the same for all values of x. The standard deviation of the residuals “pools” information across all of the individual distributions at each x-value, and pooled estimates are appropriate only when they combine information for groups with the same variance.</p></li>
 <li><p><strong>How to check?</strong> A scatterplot of y against x offers a visual check (we did this all the way at the top). Be alert for a “fan” shape or other tendency for the variation to grow or shrink in one part of the scatterplot. Often, it is better to look at the residuals plotted against the predicted values <span class="math inline">\(\hat{y}\)</span>.</p></li>
 </ul>
-<div id="scale-location-plot" class="section level2">
-<h2>Scale-location plot</h2>
+</div>
+<div id="scale-location-plot" class="section level1">
+<h1>(Scale-location plot)</h1>
 <pre class="r"><code>plot(reg.output, which=3)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="480" /></p>
 <ul>
 <li><p>The scale-location plot is a more sensitive approach to looking for deviations from the constant variance assumption. If you see significant trends in the red line on this plot, it tells you that the residuals (and hence errors) have non-constant variance. That is, the assumption that all the errors have the same variance is not true.</p></li>
 <li><p>When you see a flat line like what’s shown above, it means your errors have constant variance, like we want to see.</p></li>
 </ul>
-</div>
 </div>
 <div id="normal-population-assumption" class="section level1">
 <h1>4. Normal population assumption</h1>
@@ -500,22 +500,22 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p>This assumption becomes less important as the same size grows because the model is about means and the Central Limit Theorem takes over.</p></li>
 <li><p><strong>How to check?</strong> Nearly normal condition (qq plot) and outlier condition (Cook’s distance).</p></li>
 </ul>
-<div id="residuals-vs.-leverage-plot" class="section level2">
-<h2>Residuals vs. Leverage plot</h2>
+</div>
+<div id="residuals-vs.-leverage-plot" class="section level1">
+<h1>(Residuals vs. Leverage plot)</h1>
 <pre class="r"><code>plot(reg.output, which=5)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-9-1.png" width="480" /></p>
 <ul>
 <li>There’s no single accepted definition for what consitutes an outlier. One possible definition is that an outlier is any point that isn’t approximated well by the model (has a large residual) and which significantly influences model fit (has large leverage). This is where the Residuals vs Leverage plot comes in.</li>
 </ul>
 </div>
-<div id="normal-qq-plot" class="section level2">
-<h2>Normal qq plot</h2>
+<div id="normal-qq-plot" class="section level1">
+<h1>(Normal qq plot)</h1>
 <pre class="r"><code>plot(reg.output, which=2)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
 <ul>
 <li>The Normal QQ plot helps us to assess whether the residuals are roughly normally distributed. If the residuals look far from normal we may be in trouble. In particular, if the residual tend to be larger in magnitude than what we would expect from the normal distribution, then our p-values and confidence intervals may be too optimisitic. i.e., we may fail to adequately account for the full variability of the data.</li>
 </ul>
-</div>
 </div>
 <div id="references" class="section level1 unlisted unnumbered">
 <h1 class="unlisted unnumbered">References</h1>

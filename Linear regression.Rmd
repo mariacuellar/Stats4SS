@@ -29,7 +29,7 @@ library(datasets)
 
 The data give the speed of cars (in miles per hour, mph) and the distances taken to stop (in miles). The data were recorded in the 1920s.
 
-## Scatterplot
+# (Scatterplot)
 
 This is what the scatterplot of speed vs distance looks like. 
 
@@ -60,7 +60,7 @@ So, the fact that the relationship looks linear tells us that perhaps a simple l
 
 # Linear model
 
-## The model
+## The model {.unlisted .unnumbered}
 
 - The linear regression model assumes that the *means* of the distributions of y's for each x fall along the line, even though the individuals are scattered around it. 
 
@@ -73,7 +73,7 @@ We use Greek letters to denote idealized models. Whenever we use linear regressi
 - Are the data really going to be distributed like this?
 
 
-## The errors
+## The errors {.unlisted .unnumbered}
 
 - No, not all the individual y's are at these means. Some are above, some below. So, like all models, this one makes **errors**. They are model errors so we call them $\epsilon$.
 
@@ -82,7 +82,7 @@ $$y = \beta_0 + \beta_1 x + \epsilon,$$
 where $x$ and $y$ are each individual point's $x$ and $y$ values, the $\beta$s are the **parameters** of the model (slope and intercept), and $\epsilon$ are the model errors that soak up the deviation from the model to the actual point. This equation is true for each data point.
 
 
-## The regression line
+## The regression line {.unlisted .unnumbered}
 
 - We estimate the $\beta$s by finding a **regression line** 
 $$\hat{y} = b_0 + b_1 x,$$
@@ -147,14 +147,14 @@ Now we revisit the assumptions.
 - **How to check?** You can see violations of this if you plot a scatterplot of the residuals against x or against the predicted values $\hat{y}$. That plot will have a horizontal direction and should have no pattern if the condition is satisfied. You can think of the residuals as being estimates of the error terms. So anytime we’re looking at a plot that involves residuals, we’re doing so because we’re trying to assess whether some assumption about the errors appears to hold in our data.
 
 
-## Residuals vs. x
+# (Residuals vs. x)
 
 ```{r}
 plot(cars$speed.c, reg.output$residuals, ylim=c(-15,15), main="Residuals vs. x", xlab="x, Scaled speed", ylab="Residuals")
 abline(h = 0, lty="dashed")
 ```
 
-## Residuals vs. fitted
+# (Residuals vs. fitted)
 
 ```{r,echo=TRUE, fig.width=5, fig.height=5}
 plot(reg.output, which=1)
@@ -180,7 +180,7 @@ We check displays of the regression residuals for evidence of patterns, trends, 
 
 - **How to check?** A scatterplot of y against x offers a visual check (we did this all the way at the top). Be alert for a "fan" shape or other tendency for the variation to grow or shrink in one part of the scatterplot. Often, it is better to look at the residuals plotted against the predicted values $\hat{y}$.
 
-## Scale-location plot
+# (Scale-location plot)
 
 ```{r, echo=TRUE, fig.width=5, fig.height=5}
 plot(reg.output, which=3)
@@ -201,7 +201,7 @@ plot(reg.output, which=3)
 - **How to check?** Nearly normal condition (qq plot) and outlier condition (Cook's distance). 
 
 
-## Residuals vs. Leverage plot
+# (Residuals vs. Leverage plot)
 
 ```{r,echo=TRUE, fig.width=5, fig.height=5}
 plot(reg.output, which=5)
@@ -210,7 +210,7 @@ plot(reg.output, which=5)
 - There’s no single accepted definition for what consitutes an outlier. One possible definition is that an outlier is any point that isn’t approximated well by the model (has a large residual) and which significantly influences model fit (has large leverage). This is where the Residuals vs Leverage plot comes in.
 
 
-## Normal qq plot
+# (Normal qq plot)
 
 ```{r, echo=TRUE, fig.width=5, fig.height=5}
 plot(reg.output, which=2)
