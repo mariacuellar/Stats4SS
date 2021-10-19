@@ -11,11 +11,10 @@ output:
 
 ---
 
-# **Statistics for the Social Sciences** {.unlisted .unnumbered}
-
 This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.
 
-# Getting Started
+# Getting started with the toolkit
+
 Before we meet for our next class there are few things you should try at home to get started.
 
 This video (https://www.youtube.com/watch?v=nc7XhQrasCM&ab_channel=ProgrammingForPsychologists) will guide you through setting up all the software you will need. For now, you don't need to understand all the details. It's most important that you set up your personal page and download the relevant programs. Note: Credit is given to Matthew Crump, a Psychology professor at CUNY, who made that awesome video.

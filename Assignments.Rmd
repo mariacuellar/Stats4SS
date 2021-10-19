@@ -15,8 +15,7 @@ output:
 
 This page will contain all the assignments you submit for the class.
 
-# TESTING CHANGES
-
+Created: 2021-09-19, Last compiled: `r Sys.Date()`
 
 ### Instructions for all assignments
 
