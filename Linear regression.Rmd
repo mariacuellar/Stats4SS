@@ -176,7 +176,7 @@ We check displays of the regression residuals for evidence of patterns, trends, 
 - In our example this looks pretty good. We don't need to plot the residuals vs. the lagged residuals because we don't think there's a time-series component in the data.
 
 
-# 3. Equal variance assumption (homoscedasticity)
+# 3. Equal variance assumption/homoscedasticity
 
 - The variability in y should be about the same for all values of x. The standard deviation of the residuals "pools" information across all of the individual distributions at each x-value, and pooled estimates are appropriate only when they combine information for groups with the same variance.
 
@@ -220,9 +220,11 @@ plot(reg.output, which=2)
 
 - The Normal QQ plot helps us to assess whether the residuals are roughly normally distributed. If the residuals look far from normal we may be in trouble. In particular, if the residual tend to be larger in magnitude than what we would expect from the normal distribution, then our p-values and confidence intervals may be too optimisitic. i.e., we may fail to adequately account for the full variability of the data.
 
+- This qq plot is not great, especially at the top right. This tells us that the right tail of the distribution is probably "light" or smaller than usual for a normal distribution. 
 
+- The images below are a guide that tells you what might be happening.
 
-
+![](images/qqplot interpretations.png)
 
 # References {.unlisted .unnumbered}
 
@@ -232,7 +234,7 @@ plot(reg.output, which=2)
 
 - https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html
 
-
+- https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot
 
 
 

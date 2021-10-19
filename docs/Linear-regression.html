@@ -478,8 +478,8 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p>In our example this looks pretty good. We don’t need to plot the residuals vs. the lagged residuals because we don’t think there’s a time-series component in the data.</p></li>
 </ul>
 </div>
-<div id="equal-variance-assumption-homoscedasticity" class="section level1">
-<h1>3. Equal variance assumption (homoscedasticity)</h1>
+<div id="equal-variance-assumptionhomoscedasticity" class="section level1">
+<h1>3. Equal variance assumption/homoscedasticity</h1>
 <ul>
 <li><p>The variability in y should be about the same for all values of x. The standard deviation of the residuals “pools” information across all of the individual distributions at each x-value, and pooled estimates are appropriate only when they combine information for groups with the same variance.</p></li>
 <li><p><strong>How to check?</strong> A scatterplot of y against x offers a visual check (we did this all the way at the top). Be alert for a “fan” shape or other tendency for the variation to grow or shrink in one part of the scatterplot. Often, it is better to look at the residuals plotted against the predicted values <span class="math inline">\(\hat{y}\)</span>.</p></li>
@@ -515,8 +515,11 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <pre class="r"><code>plot(reg.output, which=2)</code></pre>
 <p><img src="Linear-regression_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
 <ul>
-<li>The Normal QQ plot helps us to assess whether the residuals are roughly normally distributed. If the residuals look far from normal we may be in trouble. In particular, if the residual tend to be larger in magnitude than what we would expect from the normal distribution, then our p-values and confidence intervals may be too optimisitic. i.e., we may fail to adequately account for the full variability of the data.</li>
+<li><p>The Normal QQ plot helps us to assess whether the residuals are roughly normally distributed. If the residuals look far from normal we may be in trouble. In particular, if the residual tend to be larger in magnitude than what we would expect from the normal distribution, then our p-values and confidence intervals may be too optimisitic. i.e., we may fail to adequately account for the full variability of the data.</p></li>
+<li><p>This qq plot is not great, especially at the top right. This tells us that the right tail of the distribution is probably “light” or smaller than usual for a normal distribution.</p></li>
+<li><p>The images below are a guide that tells you what might be happening.</p></li>
 </ul>
+<p><img src="images/qqplot%20interpretations.png" /></p>
 </div>
 <div id="references" class="section level1 unlisted unnumbered">
 <h1 class="unlisted unnumbered">References</h1>
@@ -524,6 +527,7 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p>DVB Chp 25</p></li>
 <li><p><a href="https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R" class="uri">https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R</a></p></li>
 <li><p><a href="https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html" class="uri">https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html</a></p></li>
+<li><p><a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot" class="uri">https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot</a></p></li>
 </ul>
 </div>
 
