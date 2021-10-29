@@ -346,14 +346,229 @@ div.tocify {
 </div>
 
 
-<p>Created: 2021-10-19, Last compiled: 2021-10-19</p>
+<p>Created: 2021-10-19, Last compiled: 2021-10-29</p>
 <p>Here we discuss how one should run a linear regression in R. There is a special emphasis on explaining what is a model, and how we use it to evaluate the relationship between two variables, x and y, in order to do proper inferences and predictions.</p>
-<div id="dataset" class="section level1">
-<h1>Dataset</h1>
+<div id="lecture-6" class="section level1">
+<h1>Lecture 6</h1>
+<div id="what-is-linear-regression" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">What is linear regression?</h2>
+<p>The correlation between two variables tells us whether the linear association between them is strong. But it does not tell us <em>what the line is</em>.</p>
+<p>A linear model gives an equation of a straight line through the data. This model can predict the value y for any value x, which can be within the sample or not.</p>
+<p>Of course, no line will go through all the points, but a linear model can summarize the general pattern with only a couple of parameters.</p>
+<p>Like all models of the real world, the line will be wrong in the sense that it can’t match reality <em>exactly</em>, but it can help us understand how the variables are associated.</p>
+</div>
+<div id="predicted-values" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Predicted values</h2>
+<p>The estimate made from a model is the <em>predicted value</em> and we write it as <span class="math inline">\(\hat{y}\)</span> (called <em>y-hat</em>) to distinguish it from the observed value, <em>y</em>.</p>
+<p>The difference between the observed value and its associated predicted value is called the <em>residual</em>. The residual value tells us how far off the model’s prediction is at that point.</p>
+<p><span class="math display">\[
+Residual = Observed\ value - Predicted\ value.
+\]</span></p>
+<p><img src="images/residuals.png" /></p>
+</div>
+<div id="the-linear-model" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">The linear model</h2>
+<p>A straight line can be written as <span class="math display">\[
+y=mx + b.
+\]</span></p>
+<p>We’ll use this form for our linear model, but in statistics we use slightly different notation: <span class="math display">\[
+\hat{y}= \hat{b}_0 + \hat{b}_1 x.
+\]</span></p>
+<p>We write <span class="math inline">\(\hat{y}\)</span> to emphasize that the points that satisfy this equation are just our <em>predicted</em> values, not the actual data values, which scatter around the line.</p>
+<p>We write <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> for the slope and intercept of the line. The estimated <span class="math inline">\(\hat{b}\)</span>’s are called the <em>coefficients</em> of the linear model, <span class="math inline">\(b_1\)</span> is the slope which tells how rapidly <span class="math inline">\(\hat{y}\)</span> changes with respect to <span class="math inline">\(x\)</span>, and <span class="math inline">\(b_0\)</span> is the intercept, which tells where the line intercepts the <span class="math inline">\(y\)</span>-axis.</p>
+</div>
+<div id="interpretation" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Interpretation</h2>
+<p>Suppose a model is: <span class="math display">\[
+\widehat{Fat} = 8.4 + 0.91 Protein.
+\]</span></p>
+<p>This means the slope 0.91 says that an item with one more gram of protein can be expected, on average, to have 0,91 more grams of fat. For the intercept, even without protein, an item would have, on average, 8.4 grams of fat. Often the intercept won’t be meaningful, but it helps us position the model vertically.</p>
+<p>This interpretation works for continuous (quantitative) predictor and outcome, but it’s not the same if either changes. More on this later.</p>
+</div>
+<div id="warning" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Warning</h2>
+<p>This is where “correlation does not imply causation” becomes very important. It is not the same to say</p>
+<p><strong>“If you increase protein by one gram, fat will increase by one gram,”</strong> as</p>
+<p><strong>“For a higher protein, by one gram, fat is higher by one gram, on average.”</strong></p>
+<p>(The second one is correct!) Why are these different?</p>
+</div>
+<div id="inference-vs.-prediction" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Inference vs. prediction</h2>
+<p>Inference is about what is the relationship between x and y, and prediction is about if I saw a new x, what would the corresponding y for it be?</p>
+</div>
+<div id="recall-assumptions-of-linear-regression" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Recall: Assumptions of linear regression</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Homoscedasticity</strong>: Homogeneity of variance. The size of the error in our prediction doesn’t change significantly across the values of the independent variable. i.e., The variance of residuals is the same for any value of <span class="math inline">\(x\)</span>.</p></li>
+<li><p><strong>Independence between observations</strong>: the observations in the dataset were collected using statistically valid sampling methods, and there are no hidden relationships among observations.</p></li>
+<li><p><strong>Normality</strong>: The data follows a normal distribution. i.e., For any fixed value of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> is normally distributed.</p></li>
+<li><p><strong>Linearity</strong>: The relationship between the independent and dependent variable is linear: the line of best fit through the data points is a straight line (rather than a curve or some sort of grouping factor). i.e., The relationship between X and the mean of Y is linear.</p></li>
+</ol>
+</div>
+<div id="visualizing-assumption-1-homoscedasticity" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Visualizing assumption 1: Homoscedasticity</h2>
+<p>The assumption is that the data is homoscedastic.</p>
+<p><img src="images/hetero.jpeg" /></p>
+</div>
+<div id="visualizing-assumption-2-independence-of-observations" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Visualizing assumption 2: Independence of observations</h2>
+<p>We do not want connections like the ones in this social network:</p>
+<p><img src="images/socialnetwork.jpeg" /></p>
+</div>
+<div id="visualizing-assumption-3-normality" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Visualizing assumption 3: Normality</h2>
+<p><img src="images/normality.png" /></p>
+</div>
+<div id="visualizing-assumption-4-linearity" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Visualizing assumption 4: Linearity</h2>
+<p>Actually, this is linearity, homoscedasticity, and normality.</p>
+<p><img src="images/allassumptions.png" /></p>
+</div>
+<div id="diagnosic-plots" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Diagnosic plots</h2>
+<p>Diagnosic plots are an amazing tool for checking whether your regression model is fitting well and satisfying assumptions.</p>
+<p>We will study four of them that come with the <code>lm</code> function in R:</p>
+<ul>
+<li>Goodness of fit:
+<ul>
+<li>R-squared: Coefficient of determination</li>
+<li>Residuals vs. fitted</li>
+</ul></li>
+<li>Assumption 1: Homoscedasticity
+<ul>
+<li>Scale-location</li>
+</ul></li>
+<li>Assumption 2: Independence
+<ul>
+<li>Can’t test visually</li>
+</ul></li>
+<li>Assumption 3: Normality
+<ul>
+<li>Normal Q-Q plot</li>
+<li>Residuals vs. leverage</li>
+</ul></li>
+<li>Assumption 4: Linearity
+<ul>
+<li>No official plot, but could use a scatterplot.</li>
+</ul></li>
+</ul>
+</div>
+<div id="goodness-of-fit-coefficient-of-determination" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Goodness of fit: Coefficient of determination</h2>
+<p>How can we tell if a linear model is fitting properly?</p>
+<p>The <strong>coefficient of determination</strong> or <span class="math inline">\(R^2\)</span> is the variation accounted for by the model. <span class="math inline">\(R^2=1\)</span> means your model perfectly predicts the data, i.e., that all of the variance in the data is in the model. <span class="math inline">\(R^2=0\)</span> means your model is not a good fit for the data.</p>
+<p><span class="math display">\[
+R^2 = \frac{\text{Variance explained by the model}}{\text{Total variance}}.
+\]</span> It is read as a percentage (i.e., has a value from 0 to 100%).</p>
+<p>The <span class="math inline">\(R^2\)</span> on the left is 15% and the <span class="math inline">\(R^2\)</span> on the right is 85%.</p>
+<p>When a regression model accounts for more of the variance, the data points are closer to the regression line. In practice, you’ll never see a regression model with an R2 of 100%.</p>
+<p>Regression models with low R-squared values can be perfectly good models. Some fields of study have an inherently greater amount of unexplainable variation. In these areas, <span class="math inline">\(R^2\)</span> values are bound to be lower.</p>
+<p><img src="images/rsquaredcomp.png" /></p>
+</div>
+<div id="scale-location-plot-a-way-to-test-assumption-1-homoscedasticity" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Scale-location plot: A way to test assumption 1 (homoscedasticity)</h2>
+<p>It’s also called Spread-Location plot. This plot shows if residuals are spread equally along the ranges of predictors. This is how you can check the assumption of equal variance (homoscedasticity). It’s good if you see a horizontal line with equally (randomly) spread points.</p>
+<p><img src="images/scalelocation.png" /></p>
+</div>
+<div id="residuals-vs.-fitted-plot-a-more-informative-version-of-r2" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Residuals vs. fitted plot: A more informative version of <span class="math inline">\(R^2\)</span></h2>
+<p>We want to know how well the model fits, so we can ask instead what the model missed: the residuals. A scatterplot of the residuals vs. the <span class="math inline">\(x\)</span>-values should be the most boring scatterplot you’ve ever seen: It shouldn’t have any interesting features, like a direction, shape, or outliers (left figure).</p>
+<p><img src="images/residualsvsfitted.png" /></p>
+</div>
+<div id="normal-q-q-plot-a-way-to-test-assumption-3-normality" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Normal Q-Q plot: A way to test assumption 3 (normality)</h2>
+<p>This plot shows if residuals are normally distributed. Do residuals follow a straight line well or do they deviate severely? It’s good if residuals are lined well on the straight dashed line. What do you think? They are probably never a perfect straight line, and this will be your call. Case 2 below definitely concerns me. I would not be concerned by Case 1 too much, although an observation numbered as 38 looks a little off.</p>
+<p><img src="images/normalqqplot.png" /></p>
+</div>
+<div id="residuals-vs.-leverage-plot-a-way-to-test-for-points-of-high-leverage" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Residuals vs. leverage plot: A way to test for points of high leverage</h2>
+<p>This plot helps us to find influential cases, if there are any. Not all outliers are influential. Unlike the other plots, here patterns are not relevant. We watch out for outlying values at the upper right corner or at the lower right corner. Those spots are the places where cases can be influential for the model.</p>
+<p>Look for cases outside of a dashed line, Cook’s distance. When cases are outside of the Cook’s distance (meaning they have high Cook’s distance scores), the cases are influential to the regression results. The regression results will be altered if we exclude those cases.</p>
+<p><img src="images/residualsvsleverage.png" /></p>
+</div>
+<div id="residuals-vs.-leverage-plot" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Residuals vs. leverage plot</h2>
+<p>Case 1 is the typical look when there is no influential case, or cases. You can barely see Cook’s distance lines (a red dashed line) because all cases are well inside of the Cook’s distance lines. In Case 2, a case is far beyond the Cook’s distance lines (the other residuals appear clustered on the left because the second plot is scaled to show larger area than the first plot). The plot identified the influential observation as #49. If I exclude the 49th case from the analysis, the slope coefficient changes from 2.14 to 2.68 and <span class="math inline">\(R^2\)</span> from .757 to .851. Pretty big impact!</p>
+</div>
+<div id="other-tools-to-improve-model-fit" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Other tools to improve model fit</h2>
+<p>Your current model might not be the best way to understand your data. In that case, you may want to go back to the beginning. Is it really a linear relationship between the predictors and the outcome?</p>
+<p>There are other tools we have not covered yet, which might make the model fit the data better:</p>
+<ul>
+<li>You may want to include a quadratic term, for example.</li>
+<li>A log transformation may better represent the phenomena that you’d like to model.</li>
+<li>Or, is there any important variable that you left out from your model? Other variables you didn’t include (e.g., age or gender) may play an important role in your model and data.</li>
+<li>Or, maybe, your data were systematically biased when collecting data. You may want to redesign data collection methods.</li>
+</ul>
+</div>
+<div id="example-simulated-height-and-weight-data" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Example: Simulated height and weight data</h2>
+<pre class="r"><code>x &lt;- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+y &lt;- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+out &lt;- lm(y~x)
+summary(out)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.3002 -1.6629  0.0412  1.8944  3.9775 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -38.45509    8.04901  -4.778  0.00139 ** 
+## x             0.67461    0.05191  12.997 1.16e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.253 on 8 degrees of freedom
+## Multiple R-squared:  0.9548, Adjusted R-squared:  0.9491 
+## F-statistic: 168.9 on 1 and 8 DF,  p-value: 1.164e-06</code></pre>
+</div>
+<div id="diagnostic-plots" class="section level2 unlisted unnumbered">
+<h2 class="unlisted unnumbered">Diagnostic plots</h2>
+<pre class="r"><code>par(mfrow=c(2,2))
+summary(out)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.3002 -1.6629  0.0412  1.8944  3.9775 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -38.45509    8.04901  -4.778  0.00139 ** 
+## x             0.67461    0.05191  12.997 1.16e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.253 on 8 degrees of freedom
+## Multiple R-squared:  0.9548, Adjusted R-squared:  0.9491 
+## F-statistic: 168.9 on 1 and 8 DF,  p-value: 1.164e-06</code></pre>
+<pre class="r"><code>setwd(&quot;/Users/mariacuellar/Documents/Penn/Classes/Crim 250 - Statistics for the Social Sciences/Assignments/Assignment 2&quot;)
+
+dat &lt;- read.csv(file = &#39;dat.nsduh.small.1.csv&#39;)
+
+plot(dat$mjage, log(dat$cigage))</code></pre>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>lm.out &lt;- lm(mjage~log(cigage), data=dat)</code></pre>
+<pre class="r"><code>par(mfrow=c(2,2)) # Change the panel layout to 2 x 2
+plot(lm.out)</code></pre>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+</div>
+</div>
+<div id="lecture-11" class="section level1">
+<h1>Lecture 11</h1>
+<div id="example-cars" class="section level2">
+<h2>Example: Cars</h2>
 <p>We will be using an example from the <code>cars</code> dataset in R. This comes with R in the <code>datasets</code> package.</p>
 <pre class="r"><code># install.packages(&quot;datasets&quot;) # only run this once per session!
 library(datasets)</code></pre>
 <p>The data give the speed of cars (in miles per hour, mph) and the distances taken to stop (in miles). The data were recorded in the 1920s.</p>
+</div>
 </div>
 <div id="scatterplot" class="section level1">
 <h1>(Scatterplot)</h1>
@@ -361,7 +576,7 @@ library(datasets)</code></pre>
 <pre class="r"><code>library(datasets)
 plot(cars$speed, cars$dist,  main=&quot;Relationship between Speed and Stopping Distance for 50 Cars&quot;,
     xlab=&quot;Speed in mph&quot;, ylab=&quot;Stopping Distance in feet&quot;)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>It kind of looks like there could be a linear relationship between the two variables, something like the blue line here. (Never mind how I plotted this blue line. I just included it here to show you that the line of best fit probably looks something like this blue line.)</p>
 <pre class="r"><code>library(datasets)
 reg.output.nc &lt;- lm(formula = dist ~ speed, data = cars)
@@ -369,7 +584,7 @@ reg.output.nc &lt;- lm(formula = dist ~ speed, data = cars)
 plot(cars$speed, cars$dist,  main=&quot;Relationship between Speed and Stopping Distance for 50 Cars&quot;,
     xlab=&quot;Speed in mph&quot;, ylab=&quot;Stopping Distance in feet&quot;)
 abline(reg.output.nc, col=&quot;blue&quot;)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>This blue line tells us there is a positive correlation between how fast the car is going and how far the car needs to go to stop. In fact, the correlation is</p>
 <pre class="r"><code>cor(cars$speed, cars$dist)</code></pre>
 <pre><code>## [1] 0.8068949</code></pre>
@@ -460,12 +675,12 @@ summary(reg.output) # calling the summary of the fitted model</code></pre>
 <h1>(Residuals vs. x)</h1>
 <pre class="r"><code>plot(cars$speed.c, reg.output$residuals, ylim=c(-15,15), main=&quot;Residuals vs. x&quot;, xlab=&quot;x, Scaled speed&quot;, ylab=&quot;Residuals&quot;)
 abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="residuals-vs.-fitted" class="section level1">
 <h1>(Residuals vs. fitted)</h1>
 <pre class="r"><code>plot(reg.output, which=1)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-7-1.png" width="480" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-11-1.png" width="480" /></p>
 <ul>
 <li>Looking at the Residuals vs Fitted plot (showing residuals on the y-axis and fitted y’s on the x-axis), we see that the red line (which is just a scatterplot smoother, showing the average value of the residuals at each value of fitted value) is quite flat. This tells us that there is no discernible non-linear trend to the residuals. Furthermore, the residuals appear to be equally variable across the entire range of fitted values. There is no indication of non-constant variance.</li>
 </ul>
@@ -488,7 +703,7 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <div id="scale-location-plot" class="section level1">
 <h1>(Scale-location plot)</h1>
 <pre class="r"><code>plot(reg.output, which=3)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="480" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-12-1.png" width="480" /></p>
 <ul>
 <li><p>The scale-location plot is a more sensitive approach to looking for deviations from the constant variance assumption. If you see significant trends in the red line on this plot, it tells you that the residuals (and hence errors) have non-constant variance. That is, the assumption that all the errors have the same variance is not true.</p></li>
 <li><p>When you see a flat line like what’s shown above, it means your errors have constant variance, like we want to see.</p></li>
@@ -502,10 +717,10 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p><strong>How to check?</strong> Nearly normal condition (qq plot) and outlier condition (Cook’s distance).</p></li>
 </ul>
 </div>
-<div id="residuals-vs.-leverage-plot" class="section level1">
+<div id="residuals-vs.-leverage-plot-1" class="section level1">
 <h1>(Residuals vs. Leverage plot)</h1>
 <pre class="r"><code>plot(reg.output, which=5)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-9-1.png" width="480" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-13-1.png" width="480" /></p>
 <ul>
 <li>There’s no single accepted definition for what consitutes an outlier. One possible definition is that an outlier is any point that isn’t approximated well by the model (has a large residual) and which significantly influences model fit (has large leverage). This is where the Residuals vs Leverage plot comes in.</li>
 </ul>
@@ -513,7 +728,7 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <div id="normal-qq-plot" class="section level1">
 <h1>(Normal qq plot)</h1>
 <pre class="r"><code>plot(reg.output, which=2)</code></pre>
-<p><img src="Linear-regression_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
+<p><img src="Linear-regression_files/figure-html/unnamed-chunk-14-1.png" width="480" /></p>
 <ul>
 <li><p>The Normal QQ plot helps us to assess whether the residuals are roughly normally distributed. If the residuals look far from normal we may be in trouble. In particular, if the residual tend to be larger in magnitude than what we would expect from the normal distribution, then our p-values and confidence intervals may be too optimisitic. i.e., we may fail to adequately account for the full variability of the data.</p></li>
 <li><p>This qq plot is not great, especially at the top right. This tells us that the right tail of the distribution is probably “light” or smaller than usual for a normal distribution.</p></li>
@@ -528,6 +743,7 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <li><p><a href="https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R" class="uri">https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R</a></p></li>
 <li><p><a href="https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html" class="uri">https://www.andrew.cmu.edu/user/achoulde/94842/homework/regression_diagnostics.html</a></p></li>
 <li><p><a href="https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot" class="uri">https://stats.stackexchange.com/questions/101274/how-to-interpret-a-qq-plot</a></p></li>
+<li><p><a href="https://data.library.virginia.edu/diagnostic-plots/" class="uri">https://data.library.virginia.edu/diagnostic-plots/</a></p></li>
 </ul>
 </div>
 
