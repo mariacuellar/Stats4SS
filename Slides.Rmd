@@ -1,0 +1,43 @@
+---
+title: "Linear regression"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 2
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+
+## Topics
+
+- 9/1 [Introduction](https://upenn.box.com/s/9pkstm845mph0rsuvvcuhwbym8hi85ib)
+- 9/8 [Coding toolkit (R, RStudio, Rmd, GitHub desktop, create GitHub website)](https://upenn.box.com/s/ugmo049kbmm2lrvejv13j8vrsogxsv6p)
+- 9/13 [Exploratory data analysis (EDA)](https://upenn.box.com/s/wye5lac0m2ns83uu9zgpxvzkvb4dwa01)
+- 9/15 [Exploratory data analysis + how to submit an assignment on your website](https://upenn.box.com/s/2o695wzl0qjctlbs0evrijel0v7nx2ml) 
+- 9/20 [How to characterize a variable's distribution](https://upenn.box.com/s/s1ogyiqgiahklmsgvd15pcgmx99wlpwf)
+- 9/22 [Comparing variables](https://upenn.box.com/s/sset2b2vry9vas2zqsqu6p6wbsblmida)
+- 9/27 [Linear regression](https://upenn.box.com/s/2o695wzl0qjctlbs0evrijel0v7nx2ml)
+- 9/29 [Exam 1 review](https://upenn.box.com/s/o6segj1p5q6zvsjoj2v3q5ulk2e3bafo)
+- 10/6 [Data ethics](https://upenn.box.com/s/ek1f566842pdergw1jru8g2ibx13e1oi) 
+- 10/11 [Data ethics, continued](https://upenn.box.com/s/z9oarnifkas9dzwus0cyj4uy2cin5btv)
+- 10/13 [Understanding randomness](https://upenn.box.com/s/gteytgv2jk9i3cxa0yylsb3heml3bwge)
+- 10/18 [Simple linear regression in R](https://upenn.box.com/s/2dzlwtc2dc01v8vuoyejfovggeoejlsj)
+- 10/20 [Hypothesis testing (t-test)](https://upenn.box.com/s/9gttx2jw65viy257i3vla3u5pjbqh101)
+- 10/25 [Data transformations for linear regression](https://upenn.box.com/s/xskv2n0ldawjjhtr02kz1zmwb1sm4qoc)
+- 10/27 [Exam 2 review](https://upenn.box.com/s/grr4f6igs21vry0f1j72fexh660x0for)
+- 11/3 [ANOVA (and why this is the same as a linear regression)](https://upenn.box.com/s/mdkkmgp0wmam7oynn6e85kkrppgmr203)
+- 11/8 [Interpreting p-values, confidence intervals, credible intervals](https://upenn.box.com/s/r67xvmly1wh013vy4tji7eg5lodm37y4) 
+- 11/10 [Introduction to causal inference](https://upenn.box.com/s/sg4hmjaqttsbb8o7b4fwut4a7gwgutal)
+- 11/15 [The probability of causation](https://upenn.box.com/s/nmxtvga8oxpt5xx418xvjepn9xmhyo90)
+- 11/17 [Experiments](https://upenn.box.com/s/oqve76aembof6twy03hy5f7ni8y77tpl)
+- 11/22 [Causal analysis of risk assessment in criminal sentencing](https://upenn.box.com/s/ya1g7kh4go8l4sbj0ak66br8bdi9ybxo)
+- 11/29 [Difference-in-differences](https://upenn.box.com/s/eu3yasgtlw1fo9gayi0a8lwrpkmwgb6n)
+- 12/1 [Regression discontinuity, instrumental variables](https://upenn.box.com/s/sqbs6xjwlc38nylne6no1bagq11ata6l)
+

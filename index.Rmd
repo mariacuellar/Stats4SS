@@ -13,6 +13,9 @@ output:
 
 This website is for students in Crim 250: Statistics for the Social Sciences to learn R and statistics.
 
+**Note**: The rest of the lectures, assignments, and exams are on the Canvas site. It is your responsibility to upload your completed assignments to your own website.
+
+
 # Getting started with the toolkit
 
 Before we meet for our next class there are few things you should try at home to get started.

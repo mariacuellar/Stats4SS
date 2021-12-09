@@ -10,4 +10,6 @@ navbar:
       href: Linear-regression.html
     - text: "Assignments"
       href: Assignments.html
+    - text: "Slides"
+      href: Slides.html
 output_dir: "docs"
